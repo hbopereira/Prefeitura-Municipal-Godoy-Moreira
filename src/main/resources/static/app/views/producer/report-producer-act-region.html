@@ -1,0 +1,117 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+    <h3 class="well lead" align="center">Produtores Atividade Região</h3>
+    <br/>
+    <form class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+           <input type="text" ng-model="pesquisaProdutor" class="form-control" placeholder="Pesquisar...">
+       </div>
+           <button type="submit" class="btn btn-primary">Pesquisar</button>
+    </form> 
+ <br/>
+ <br/>
+ <hr class="featurette-divider"/>
+ <div id="prodFamilyAgriculture"> 
+    <h4 align="center">Principais Atividades Produtor</h4>
+    <br/> 
+    <hr class="featurette-divider"/>
+    <div class="row"> 
+     <div class="col-sm-4 col-md-2">
+        <div>
+           <p><h4>Mandioca</h4> total: {{totProdAct}} registros </p>
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-2">
+        <div>
+           <p><h4>Maracuja</h4> total: registros </p>
+        </div>
+     </div>
+      <div class="col-sm-4 col-md-2">
+        <div>
+           <p><h4>Morango</h4> total: registros </p>
+        </div>
+     </div>
+      <div class="col-sm-4 col-md-2">
+        <div>
+           <p><h4>Gado Corte</h4> total: registros </p>
+        </div>
+     </div>
+       <div class="col-sm-4 col-md-2">
+        <div>
+           <p><h4>Gado Leite</h4> total: registros </p>
+        </div>
+     </div> 
+      <div class="col-sm-4 col-md-2">
+        <div>
+           <p><h4>Gado Recrio</h4> total: registros </p>
+        </div>
+     </div>   
+   </div>
+   <br/>
+   <br/>   
+    <table align="center" id="prodFamily" class="table table-striped">
+     <thead>
+      <tr>
+         <th>Nome Produtor</th>
+         <th>Nascimento</th>
+         <th>CPF</th>
+         <th>Cad-Pro</th>
+         <th>Cod-Incra</th>
+         <th>Região</th>
+         <th>Atividade</th>
+      </tr>
+     </thead> 
+       <tr ng-repeat="producer in producers | filter: pesquisaProdutor">
+          <td>{{producer.name}}</td>
+          <td>{{producer.birth_date | date: 'dd/MM/yyyy'}}</td>
+          <td>{{producer.cpf}}</td>
+          <td>{{producer.cadPro}}</td>
+          <td>{{producer.cod_incra}}</td>
+          <td>
+            <span ng-repeat="reg in producer.regions">{{reg}}</span>
+		  </td>
+		  <td>
+            <span ng-repeat="prod in producer.activities">{{prod.description}}<br/></span>
+		  </td>  
+       </tr>
+    </table>
+     <br/>
+     <br/>
+   
+   <div align="left">
+        <div>
+           <p><h4>Total</h4> {{tot}} registros ao todo</p>
+        </div>
+   </div>
+</div>   
+   <div style="font-weight: bold;" align="center">
+	   <a href="javascript:HTMLtoPDF()">Gerar PDF</a>
+	   <br/>
+	   <br/>
+	   <button id="btnExport" class="btn btn-primary btn-sm">Gerar Excel</button>
+   </div>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <footer align="center">
+      <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+   </footer>
+   
+   <script>
+    $(document).ready(function () {
+        $("#btnExport").click(function () {
+            $("#prodFamily").btechco_excelexport({
+                containerid: "prodFamily"
+               , datatype: $datatype.Table
+               , filename: 'sample'
+            });
+        });
+    });
+</script>
+
+</body>

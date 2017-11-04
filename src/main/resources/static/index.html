@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prefeitura Municipal Godoy Moreira</title>
+
+<!-- importing the bootstrap styles -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">		
+	
+<link rel="icon" href="app/imagens/prefeitura-godoy-moreira.jpg"/>	
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- including css -->
+<link href="css/estilos.css" rel="stylesheet"/>
+	
+    
+</head>
+
+<style>
+.margin-top-5 {
+	margin-top: 10px;
+}
+
+.panel-scroll {
+	height: 300px;
+	overflow-y: auto;
+}
+</style>
+<body ng-app="JWTDemoApp">
+
+	<!-- View for adding the navigation bar -->
+	<div ui-view="nav"></div>
+
+
+
+	<div class="container" style="margin-top: 50px;">
+		<!-- Main view for showing all views -->
+		<div ui-view="content"></div>
+	</div>
+	
+	
+    
+	<!-- Including Scripts -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
+  <script 
+        src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script> 
+  <script 
+        src="https://vitalets.github.io/checklist-model/checklist-model.js"></script>       
+        
+	<!-- Including jquery and twitter bootstrap -->
+    <script
+		src="app/js/jspdf.js"></script>
+     <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>		
+     <script
+		src="app/js/pdfFromHTML.js"></script>
+     <script 
+        src="app/js/jquery.btechco.excelexport.js"></script>
+     <script 
+        src="app/js/jquery.base64.js"></script>		 		
+	<script
+		src="http://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js""></script>	
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Including the app.js and route.js  -->
+	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="app/route.js"></script>
+
+	<!-- Including services -->
+	<script type="text/javascript" src="app/services/auth-service.js"></script>
+
+	<!-- Including controllers -->
+	<script type="text/javascript" src="app/controllers/nav.js"></script>
+	<script type="text/javascript" src="app/controllers/login.js"></script>
+	<script type="text/javascript" src="app/controllers/users.js"></script>
+	<script type="text/javascript" src="app/controllers/home.js"></script>
+	<script type="text/javascript" src="app/controllers/page-not-found.js"></script>
+	<script type="text/javascript" src="app/controllers/access-denied.js"></script>
+	<script type="text/javascript" src="app/controllers/register.js"></script>
+	<script type="text/javascript" src="app/controllers/athlete.js"></script>
+	<script type="text/javascript" src="app/controllers/producer.js"></script>
+	<script type="text/javascript" src="app/controllers/activity.js"></script>
+	<script type="text/javascript" src="app/controllers/attendance.js"></script>
+	<script type="text/javascript" src="app/controllers/schedule.js"></script>
+	<script type="text/javascript" src="app/controllers/people.js"></script>
+	
+	
+	
+	
+</body>
+</html>

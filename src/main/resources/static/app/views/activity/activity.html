@@ -1,0 +1,71 @@
+<style>
+em{
+	color: red;
+}
+
+</style>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container"> 
+ <h3 class="well lead" align="center">Nova Atividade</h3>
+  <div class="text-right">
+       <button type="button" class="btn btn-success btn-sm" ui-sref="registered-activities">
+		 <span class="glyphicon glyphicon-plus"></span> Atividades Registradas
+	   </button>
+  </div>
+  <hr class="featurette-divider"/>
+  <br/>
+  <form name="dados" ng-submit="saveActivity()" id="cadastroAtividade" class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.description.$invalid && dados.description.$dirty }">
+           <label for="Descricao" class="required">Descrição<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="activity.description" name="description" class="form-control" id="description" placeholder="Informe a Descrição">
+        </div>
+     </div>
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
+          <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
+          <textarea type="text" required="required" ng-model="activity.details" name="details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
+        </div>
+     </div>
+  </div>
+   <div class="row">
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.typePrague.$invalid && dados.typePrague.$dirty }">
+           <label for="Descricao" class="required">Tipo de Praga<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="activity.typePrague" name="typePrague" class="form-control" id="description" placeholder="Informe a descrição da Praga">
+        </div>
+     </div>
+        <div class="col-md-6">
+           <div class="form-group"
+			  ng-class="{ 'has-error': dados.status.$invalid && dados.status.$dirty }">
+			    <label for="region">Periodo de Atividade<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="activity.period" id="status" name="status">
+						<option value="1 a 2 meses">1 a 2 meses</option>
+						<option value="1 a 3 meses">1 a 3 meses</option>
+						<option value="2 a 4 meses">2 a 4 meses</option>
+						<option value="2 a 5 meses">2 a 5 meses</option>
+						<option value="Tempo inderteminado">Tempo Indeterminado</option>
+			       </select>
+	        </div>
+     </div>
+  </div>  
+
+  
+  <button type="submit" ng-disabled="!activity.description" class="btn btn-primary">Salvar</button>
+  <button type="submit" ng-click="limparCampos()" class="btn btn-warning">Cancelar</button>
+       
+  </form>
+  <hr class="featurette-divider"/>
+  <br>
+
+
+
+  <footer align="center">
+        <p>&copy; 2017 Todos os diretos reservados a Prefeitura Municipal &middot;</p>
+  </footer>
+ </div>

@@ -1,0 +1,58 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+			    <h4 class="well lead" align="center">Novo Usuário</h4>
+			    <div class="text-right">
+                   <button type="button" class="btn btn-success btn-sm" ui-sref="registered-users">
+		              <span class="glyphicon glyphicon-plus"></span> Usuarios Registrados
+	                </button>
+                </div>	
+                <hr class="featurette-divider"/>	
+				<form ng-submit="addUser()" name="userForm" novalidate class="alert alert-warning">
+						<div class="form-group"
+							ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
+							<label for="name">Nome:</label> <input type="text" required
+								class="form-control" ng-model="appUser.name" id="name"
+								name="name" placeholder="Informe o Nome">
+						</div>
+
+						<div class="form-group"
+							ng-class="{ 'has-error': userForm.username.$invalid && userForm.username.$dirty }">
+							<label for="username">Nome de Usuário:</label> <input type="text"
+								required class="form-control" ng-model="appUser.username"
+								id="username" name="username" placeholder="Informe o Nome de Usuário">
+						</div>
+
+						<div class="form-group"
+							ng-class="{ 'has-error': userForm.username.$invalid && userForm.username.$dirty }">
+							<label for="role">Papel:</label> <select required
+								multiple="multiple" class="form-control"
+								ng-model="appUser.roles" id="role" name="role">
+								<option value="ADMIN">Administrador</option>
+								<option value="RECEPCAO">Responsável Recepção</option>
+								<option value="AGRICULTURA">Responsável Agricultura</option>
+								<option value="SUBORDINADO_R_AGRICULTURA">Subordinado R.Agricultura</option>
+								<option value="ESPORTE">Responsável Esporte</option>
+								<option value="SUBORDINADO_R_ESPORTE">Subordinado R.Esporte</option>
+							</select>
+						</div>
+
+						<div class="form-group"
+							ng-class="{ 'has-error': userForm.password.$invalid && userForm.password.$dirty }">
+							<label for="pwd">Senha:</label> <input type="password"
+								required class="form-control" id="pwd"
+								ng-model="appUser.password" name="password" placeholder="Informe a Senha">
+						</div>
+						<button type="submit" class="btn btn-primary"
+							ng-disabled="!appUser.name">Salvar</button>
+					     
+					    <button class="btn btn-warning">Cancelar</button> 		
+				</form>
+		
+		<hr class="featurette-divider"/>
+        <br>
+
+         <footer align="center">
+            <p>&copy; 2017 Todos os diretos reservados a Prefeitura Municipal &middot;</p>
+         </footer>

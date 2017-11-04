@@ -1,0 +1,138 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">	
+  
+	  <h3 class="well lead" align="center">Usuários Registrados</h3>
+	  <br/>
+	  <div class="text-right">
+         <button type="button" class="btn btn-success btn-sm" ui-sref="new-user">
+		   <span class="glyphicon glyphicon-plus"></span> Registrar Usuario
+	     </button>
+	  </div>
+	  <br/>
+      <form class="navbar-form navbar-right" role="search">
+         <div class="form-group">
+             <input type="text" ng-model="pesquisaUsuario" class="form-control" placeholder="Pesquisar...">
+          </div>
+             <button type="submit" class="btn btn-primary">Pesquisar</button>
+      </form>  
+	       <div>
+				<div class="alert alert-danger margin-top-5" ng-show="deleteMessage">{{deleteMessage}}</div>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nome</th>
+							<th>Nome de Usuário</th>
+							<th>Nivel de Usuário</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in users | filter: pesquisaUsuario |startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
+							<td>{{$index+1}}</td>
+							<td>{{user.name}}</td>
+							<td>{{user.username}}</td>
+							<td><span ng-repeat="role in user.roles">{{role}}<span
+									ng-if="$index < (user.roles.length-1)">,</span>
+							</span></td>
+							<td><button title="Vizualizar" type="button" class="btn btn-warning btn-sm"
+								data-toggle="modal" data-target="#confirmar" ng-click="selectUser(user)">
+									<span class="glyphicon glyphicon-edit"></span>
+								</button></td>
+							<td>
+								<button title="Excluir" type="button" class="btn btn-danger btn-sm"
+								 ng-click="deleteUser(user)">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		 <!-- modal for exclusion of user  -->
+          <form> 
+            <div class="modal fade" id="confirm" role="dialog" tabindex="-1">
+               <div class="modal-dialog modal-md">
+                 <div class="modal-content">
+                   <div class="modal-body">
+                       <p> Tem certeza que deseja excluir este registro ?</p>
+                   </div>
+                   <div class="modal-footer">
+                       <button type="submit" class="btn btn-danger" ng-click="deleteUser(appUser)">Sim</button>
+                       <button type="button" data-dismiss="modal" class="btn btn-warning">Não</button>
+                   </div>
+                 </div>
+             </div>
+           </div>
+         </form>	
+         	
+   <!-- modal of edition of user  -->        
+ <div class="modal fade" id="confirmar" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+                <p class="well lead" align="center">Controle de Usuário</p> 
+ <form name="dados"  class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-md-6">
+        <div class="form-group">
+           <label for="Nome" class="required">Nome<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedUser.name" class="form-control" id="name">
+        </div>
+     </div>
+       <div class="col-md-6">
+        <div class="form-group">
+           <label for="NomeUsuario" class="required">Nome de Usuario<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedUser.username" class="form-control" id="username">
+        </div>
+     </div>
+  </div> 
+  <div class="row">
+     <div class="col-md-6">
+        <div class="form-group">
+           <label for="papel" class="required">Senha<em class="asterisco">*</em></label>
+           <input type="password" required="required" ng-model="clickedUser.password" class="form-control" id="password">
+        </div>
+     </div>
+     <div class="col-md-6">
+       	<div class="form-group"
+			ng-class="{ 'has-error': userForm.username.$invalid && userForm.username.$dirty }">
+			  <label for="role">Nivel de Usuario:</label> <select required
+					multiple="multiple" class="form-control"
+					ng-model="clickedUser.roles" id="role" name="role">
+					    <option value="ADMIN">Administrador</option>
+						 <option value="RECEPCAO">Responsável Recepção</option>
+						 <option value="AGRICULTURA">Responsável Agricultura</option>
+						 <option value="SUBORDINADO_R_AGRICULTURA">Subordinado R.Agricultura</option>
+						 <option value="ESPORTE">Responsável Esporte</option>
+						 <option value="SUBORDINADO_R_ESPORTE">Subordinado R.Esporte</option>		
+				</select>
+		</div>
+     </div>
+  </div>  
+  <button type="submit" data-dismiss="modal" class="btn btn-primary" ng-click="editUser()">Editar</button>
+  <button type="submit" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+       
+      </form>
+     </div>
+   </div>
+  </div>
+</div>   
+	
+	  <div align="left">
+        <div>
+           <p><h4>Total</h4> {{tot}} registros ao todo</p>
+        </div>
+     </div>
+     
+	  <div align="center">
+        <pagination total-items="users.length" class="pagination-sm" ng-model="currentPage" items-per-page="pageSize"></pagination> 
+     </div>
+    <br/>
+	<br/>
+	<br/>
+    <footer align="center">
+        <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+    </footer>
+</div>

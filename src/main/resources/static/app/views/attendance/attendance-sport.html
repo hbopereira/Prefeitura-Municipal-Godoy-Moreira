@@ -1,0 +1,390 @@
+<style>
+em{
+	color: red;
+}
+
+</style>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container"> 
+ <h3 class="well lead" align="center">Novo Atendimento</h3>
+  <div class="text-right">
+       <button type="button" class="btn btn-success btn-sm" ui-sref="register-people">
+		 <span class="glyphicon glyphicon-plus"></span> Registrar Pessoa
+	   </button>
+  </div>
+  <br/>
+    <div class="text-right"> 
+       <form class="navbar-form navbar-right" role="search">
+          <div class="form-group">
+              <input type="Text" ng-model="pesquisa" class="form-control" placeholder="Pesquisar...">
+          </div>
+          <button type="submit" class="btn btn-primary">Pesquisar</button>
+      </form> 
+      <br/>
+  </div>
+  <br/>
+  <hr class="featurette-divider"/>  
+  <div class="row">
+   <div class="col-sm-6">
+   <h4 align="center">Atletas</h4>
+    <div class="panel panel-default">
+     <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>CPF</th>        
+            <th></th>        
+          </tr>
+        </thead> 
+          <tr ng-repeat="ath in athletes| filter: pesquisa | limitTo: 1">
+             <td>{{ath.name}}</td>
+             <td>{{ath.birthDate | date: 'dd/MM/yyyy'}}</td>
+             <td>{{ath.cpf}}</td>     
+			 <td>
+			  <button title="Vizualizar" type="button" class="btn btn-info btn-sm"
+			    data-toggle="modal" data-target="#confirma" ng-click="selectAthlete(athlete)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td> 
+          </tr>
+      </table>
+    </div>
+  </div>
+  </div>
+    <div class="col-sm-6">
+     <h4 align="center">Pessoas Diversas</h4>
+     <div class="panel panel-default">
+       <div class="panel-body">
+       <table class="table table-striped">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>CPF</th>           
+            <th></th>
+          </tr>
+        </thead> 
+          <tr ng-repeat="people in peoples | filter: pesquisa | limitTo: 1">
+             <td>{{people.name}}</td>
+             <td>{{people.birth_date | date: 'dd/MM/yyyy'}}</td>
+             <td>{{people.cpf}}</td>                 
+			 <td>
+			  <button title="Vizualizar" type="button" class="btn btn-info btn-sm"
+			    data-toggle="modal" data-target="#confirmation" ng-click="selectPeople(people)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td> 
+          </tr>
+      </table>
+       </div>
+     </div>  
+    </div>
+   </div>  
+    <!-- modal of visualization of people common -->
+ <div class="modal fade" id="confirmation" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+             <p class="well lead" align="center">Controle de Pessoa</p>
+  <form name="dados" id="cadastroPeople" class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group" ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+           <label for="Nome" class="required">Nome<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.name" name="name" class="form-control" id="name" placeholder=" Informe o Nome">
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.birth_date.$invalid && dados.birth_date.$dirty }">
+           <label for="nascimento" class="required">Data de Nascimento<em class="asterisco">*</em></label>
+           <input type="date" dateFormat="dd/mm/yyyy" required="required" ng-model="clickedPeople.birth_date" name="birth_date" class="form-control" id="birthDate">
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-3">
+          <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Sexo<em class="asterisco">*</em></label>
+           <br/> 
+           <label class="rario-inline">Masculino</label>
+           <input required="required" type="radio" name="sexo" ng-model="clickedPeople.sexo" value="MASCULINO">
+           <label class="rario-inline">Feminino</label>
+           <input required="required" type="radio" name="sexo" ng-model="clickedPeople.sexo" value="FEMININO">
+        </div>
+     </div>
+  </div> 
+  <div class="row">
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameFather.$invalid && dados.nameFather.$dirty }">
+           <label for="nameFather" class="required">Nome Pai<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.nameFather" name="nameFather" class="form-control" id="nameFather" placeholder="Informe o Nome do Pai">
+        </div>
+     </div>
+      <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameMother.$invalid && dados.nameMother.$dirty }">
+           <label for="nameFather" class="required">Nome Mãe<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.nameMother" name="nameMother" class="form-control" id="nameMother" placeholder="Informe o Nome da Mãe">
+        </div>
+     </div>
+  </div> 
+  <div class="row">
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.cpf.$invalid && dados.cpf.$dirty }">
+           <label for="CPF"class="required">CPF<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.cpf" name="cpf" class="form-control" maxlength="11" id="cpf" placeholder="Informe o CPF">
+        </div>
+    </div>
+     <div class="col-sm-4 col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.rg.$invalid && dados.rg.$dirty }">
+           <label for="RG" class="required">RG<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.rg" name="rg" class="form-control" maxlength="9" id="rg" placeholder="Informe o RG">
+         </div>
+     </div>
+       <div class="col-sm-4 col-md-4">
+         <div class="form-group"
+			  ng-class="{ 'has-error': dados.regions.$invalid && dados.regions.$dirty }">
+			    <label for="region">Selecione a Região<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="clickedPeople.regions" id="region" name="regions">			           
+						<option value="Agua da Anta">Agua da Anta</option>
+						<option value="Agua da Pintada">Agua da Pintada</option>
+						<option value="Agua do Cascudo">Agua do Cascudo</option>	
+						<option value="Agua do Milton">Agua do Milton</option>
+						<option value="Agua do Tentilhão">Agua do Tentilhão</option>
+						<option value="Agua do Bananeira">Agua do Bananeira</option>
+						<option value="Godoy Moreira Centro">Godoy Moreira Centro</option>
+			       </select>
+	        </div>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
+           <br/> 
+           <label class="rario-inline">Esporte</label>
+           <input required="required" type="radio" name="sector" ng-model="clickedPeople.sector" value="ESPORTE">         
+        </div>
+   </div>
+  </div>
+  <button type="submit" data-dismiss="modal" class="btn btn-primary">Sair</button>
+  </form>
+           </div>
+        </div>
+    </div>
+  </div>
+     <!-- modal of visualization of athlete -->
+      <div class="modal fade" id="confirma" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+              <p class="well lead" align="center">Controle de Atleta</p>
+  <form name="dados" class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+           <label for="Nome" class="required">Nome<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedAthlete.name" name="name" class="form-control" id="name" placeholder="Informe o Nome">
+        </div>
+     </div>
+    <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.birthDate.$invalid && dados.birthDate.$dirty }">
+           <label for="birthDate"class="required">Data Nascimento<em class="asterisco">*</em></label>
+           <input type="Date" required="required" ng-model="clickedAthlete.birthDate" name="birthDate" class="form-control" id="birthDate" placeholder="Informe a Data Nascimento">
+        </div>
+    </div>
+     <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Sexo<em class="asterisco">*</em></label>
+           <br/> 
+           <label class="rario-inline">Masculino</label>
+           <input required="required" type="radio" name="sexo" ng-model="clickedAthlete.sexo" value="MASCULINO"><br/>
+           <label class="rario-inline">Feminino</label>
+           <input required="required" type="radio" name="sexo" ng-model="clickedAthlete.sexo" value="FEMININO">
+        </div>
+      </div> 
+  </div>
+   <div class="row">
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameFather.$invalid && dados.nameFather.$dirty }">
+           <label for="nameFather" class="required">Nome Pai<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedAthlete.nameFather" name="nameFather" class="form-control" id="nameFather" placeholder="Informe o Nome do Pai">
+        </div>
+     </div>
+      <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameMother.$invalid && dados.nameMother.$dirty }">
+           <label for="nameFather" class="required">Nome Mãe<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedAthlete.nameMother" name="nameMother" class="form-control" id="nameMother" placeholder="Informe o Nome da Mãe">
+        </div>
+     </div>
+  </div> 
+   <div class="row">
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.cpf.$invalid && dados.cpf.$dirty }">
+           <label for="CPF"class="required">CPF<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedAthlete.cpf" name="cpf" class="form-control" maxlength="11" id="cpf" placeholder="Informe o CPF">
+        </div>
+    </div>
+     <div class="col-sm-4 col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.rg.$invalid && dados.rg.$dirty }">
+           <label for="RG" class="required">RG<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedAthlete.rg" name="rg" class="form-control" maxlength="9" id="rg" placeholder="Informe o RG">
+         </div>
+     </div>
+       <div class="col-sm-4 col-md-4">
+         <div class="form-group"
+			  ng-class="{ 'has-error': dados.regions.$invalid && dados.regions.$dirty }">
+			    <label for="region">Selecione a Região<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="clickedAthlete.regions" id="region" name="regions">			           
+						<option value="Agua da Anta">Agua da Anta</option>
+						<option value="Agua da Pintada">Agua da Pintada</option>
+						<option value="Agua do Cascudo">Agua do Cascudo</option>	
+						<option value="Agua do Milton">Agua do Milton</option>
+						<option value="Agua do Tentilhão">Agua do Tentilhão</option>
+						<option value="Agua do Bananeira">Agua do Bananeira</option>
+						<option value="Godoy Moreira Centro">Godoy Moreira Centro</option>
+			       </select>
+	        </div>
+        </div>
+  </div> 
+  <div class="row">
+       <div class="col-md-4">
+           <div class="form-group"
+			  ng-class="{ 'has-error': dados.categories.$invalid && dados.categories.$dirty }">
+			    <label for="category">Categoria<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="clickedAthlete.categories" id="category" name="categories">
+			            <option value="Veterano">Veterano</option>
+			              <option value="Sub 20">Sub 20</option>
+			            <option value="Sub 17">Sub 17</option>
+						<option value="Mirim">Mirim</option>
+						<option value="Pré Mirim">Pré Mirim</option>
+						<option value="Veterano">Fraldinha</option>
+			       </select>
+	        </div>
+     </div>
+  </div>  
+  <button type="submit" ng-disabled="!clickedAthlete.name" class="btn btn-primary">Sair</button>
+  
+  </form>
+  <hr class="featurette-divider"/>             
+     </div>
+   </div>
+  </div>
+</div>
+     
+  <hr class="featurette-divider"/> 
+  <form name="dados" id="cadastroAtendimento" ng-submit="saveAttendance()" class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-sm-4 col-md-4">
+           <div class="form-group"
+	        ng-class="{ 'has-error': dados.ageMachine.$invalid && dados.ageMachine.$dirty }">
+			   <label for="typeService">Serviços Oferecidos<em class="asterisco">*</em></label>
+			     <select multiple="multiple" class="form-control" ng-model="attendance.typeService" id="typeService" name="typeService">
+				     <option value="Agendamento de Horario">Agendamento de Horario</option>     				   				 
+			     </select>
+	        </div>        
+     </div>
+       <div class="col-sm-4 col-md-4">
+           <div class="form-group"
+	        ng-class="{ 'has-error': dados.ageMachine.$invalid && dados.ageMachine.$dirty }">
+			   <label for="employee">Tipo de Campo</label>
+			     <select multiple="multiple" class="form-control" ng-disabled="!attendance.typeService" ng-model="attendance.descTypeService" id="desc" name="desc">
+				     <option value="Quadra Coberta(Cezarião)">Quadra Coberta(Cezarião)</option>
+				     <option value="Campo Society">Campo Society</option>						     
+			     </select>
+	        </div>
+     </div>
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
+           <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
+           <textarea type="text" ng-model="attendance.details" name="details" id="Details" 
+           class="form-control margim-bottom" rows="4"></textarea>
+        </div>
+     </div>
+  </div> 
+   <div class="row">
+     <div class="col-sm-4 col-md-6">
+         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
+           <label for="diaAtendimento" class="required">Dia Atendimento<em class="asterisco">*</em></label>
+           <input type="date" required="required" class="form-control" ng-model="attendance.day_attendance" name="day_attendance" id="dayAttendance" placeholder="Informe o Dia do Atendimento">
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.time_attendance.$invalid && dados.time_attendance.$dirty }">
+           <label for="horaAtendimento" class="required">Hora Atendimento<em class="asterisco">*</em></label>
+           <input type="time" class="form-control" ng-model="attendance.time_attendance" name="time_attendance" id="timeAttendance" placeholder="Hora Atendimento">
+        </div>
+     </div>
+   </div> 
+   <div class="row">
+     <div class="col-sm-4 col-md-4">
+          <div class="form-group"
+			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+			    <label for="status">Nome Pessoa<em class="asterisco">*</em></label>
+			       <select class="form-control" ng-disabled="attendance.athlete" ng-model="attendance.people.id" id="people" name="people">	 
+			            <option value>Selecione</option>       	           		            
+				        <option value="{{people.id}}" data-ng-repeat="people in peoplesFromSport">{{people.name}}</option>
+			       </select>
+	      </div>
+     </div>
+       <div class="col-sm-4 col-md-4">
+           <div class="form-group"
+			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+			    <label for="status">Nome Atleta<em class="asterisco">*</em></label>
+			        <select class="form-control" ng-disabled="attendance.people" ng-model="attendance.athlete.id" id="athlete" name="athlete">
+			            <option value>Selecione</option>
+				        <option value="{{athlete.id}}" ng-repeat="athlete in athletes">{{athlete.name}}</option>
+			       </select>   
+	        </div>
+      </div>
+       <div class="col-sm-4 col-md-4"> 
+             <div class="form-group"
+			  ng-class="{ 'has-error': dados.status.$invalid && dados.status.$dirty }">
+			    <label for="status">Status Atendimento<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="attendance.status" id="status" name="status">
+			      
+				        <option value="Andamento">Em andamento</option>						
+			       </select>
+	        </div>      
+      </div>
+  </div> 
+  <br/>
+  <div class="row">
+     <div class="col-sm-4 col-md-4">
+         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
+           <label for="diaAtendimento" class="required">Data Horario<em class="asterisco">*</em></label>
+           <input type="date" required="required" class="form-control" ng-model="attendance.dayTime" name="dayTime" id="dayTime">
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.time_attendance.$invalid && dados.time_attendance.$dirty }">
+           <label for="horaAtendimento" class="required">Horario Escolhido<em class="asterisco">*</em></label>
+           <input type="text" class="form-control" ng-model="attendance.timeOfDay" name="timeOfDay" id="timeDay">
+        </div>
+     </div>
+     <div class="col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
+           <br/> 
+           <br/>
+           <label class="rario-inline">Esporte</label>
+           <input required="required" type="radio" name="sector" ng-model="attendance.sector" value="ESPORTE">         
+        </div>
+   </div>
+  </div>   
+
+  
+  <button type="submit" class="btn btn-primary">Salvar</button>
+  <button type="submit" class="btn btn-warning">Cancelar</button>
+       
+  </form>
+  <hr class="featurette-divider"/>
+  <br>
+
+  <footer align="center">
+        <p>&copy; 2017 Todos os diretos reservados a Prefeitura Municipal &middot;</p>
+  </footer>
+ </div>

@@ -1,0 +1,184 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ <div  class="container">
+   <div class="form-group">
+        <h3 class="well lead" align="center">Pessoas Registradas</h3>
+           <div class="text-right">
+             <button type="button" class="btn btn-success btn-sm" ui-sref="register-people">
+		       <span class="glyphicon glyphicon-plus"></span> Registrar Pessoa
+	         </button>
+	      </div>
+	     <br/>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                   <input type="text" ng-model="pesquisa" class="form-control" placeholder="Pesquisar...">
+                </div>
+                  <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </form> 
+      <br/>
+   </div>
+ </div> 
+ <script>
+ $(document).ready( function() {
+     $('#dataTable').dataTable();
+   } );
+ </script>
+ <hr class="featurette-divider"/>
+ <br/>
+    <div class="container">
+      <table id="dataTable" class="table table-striped">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>CPF</th>
+            <th>RG</th>
+            <th>Sexo</th>
+            <th>Região</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="people in peoples | filter: pesquisa | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
+             <td>{{people.name}}</td>
+             <td>{{people.birth_date | date: 'dd/MM/yyyy'}}</td>
+             <td>{{people.cpf}}</td>
+             <td>{{people.rg}}</td>
+             <td>{{people.sexo}}</td>
+             <td>
+               <span ng-repeat="region in people.regions">{{region}}</span>
+			 </td>   
+             <td>
+              <button title="Editar/Visualizar" type="button" class="btn btn-warning btn-sm"
+				data-toggle="modal" data-target="#confirmation" ng-click="selectPeople(people)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td>
+             <td>
+             <!--  data-toggle="modal" data-target="#confirm"-->
+			  <button title="Excluir" type="button" class="btn btn-danger btn-sm">
+				<span class="glyphicon glyphicon-trash"></span>
+			  </button>
+			</td>  
+          </tr>
+       </tbody>   
+     </table> 
+     <hr class="featurette-divider"/>
+     <!-- modal of exclusion of activity -->
+     <form>
+     <div class="modal fade" id="confirm" role="dialog" tabindex="-1">
+           <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                   <div class="modal-body">
+                       <p> Tem certeza que deseja excluir este registro ?</p>
+                   </div>
+                   <div class="modal-footer">
+                      <button type="submit" class="btn btn-danger" ng-click="deleteProducer(producer)">Sim</button>
+                      <button type="button" data-dismiss="modal" class="btn btn-warning">Não</button>
+                   </div>
+              </div>
+           </div>
+     </div>
+     </form>
+  
+  <div class="modal fade" id="confirmation" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+             <p class="well lead" align="center">Controle de Pessoa</p>
+  <form name="dados" ng-submit="savePeople()" id="cadastroPeople" class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group" ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+           <label for="Nome" class="required">Nome<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.name" name="name" class="form-control" id="name" placeholder=" Informe o Nome">
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.birth_date.$invalid && dados.birth_date.$dirty }">
+           <label for="nascimento" class="required">Data de Nascimento<em class="asterisco">*</em></label>
+           <input type="date" dateFormat="dd/mm/yyyy" required="required" ng-model="clickedPeople.birth_date" name="birth_date" class="form-control" id="birthDate">
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-3">
+          <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Sexo<em class="asterisco">*</em></label>
+           <br/> 
+           <label class="rario-inline">Masculino</label>
+           <input required="required" type="radio" name="sexo" ng-model="clickedPeople.sexo" value="MASCULINO">
+           <label class="rario-inline">Feminino</label>
+           <input required="required" type="radio" name="sexo" ng-model="clickedPeople.sexo" value="FEMININO">
+        </div>
+     </div>
+  </div> 
+  <div class="row">
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameFather.$invalid && dados.nameFather.$dirty }">
+           <label for="nameFather" class="required">Nome Pai<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.nameFather" name="nameFather" class="form-control" id="nameFather" placeholder="Informe o Nome do Pai">
+        </div>
+     </div>
+      <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameMother.$invalid && dados.nameMother.$dirty }">
+           <label for="nameFather" class="required">Nome Mãe<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.nameMother" name="nameMother" class="form-control" id="nameMother" placeholder="Informe o Nome da Mãe">
+        </div>
+     </div>
+  </div> 
+  <div class="row">
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.cpf.$invalid && dados.cpf.$dirty }">
+           <label for="CPF"class="required">CPF<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.cpf" name="cpf" class="form-control" maxlength="11" id="cpf" placeholder="Informe o CPF">
+        </div>
+    </div>
+     <div class="col-sm-4 col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.rg.$invalid && dados.rg.$dirty }">
+           <label for="RG" class="required">RG<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedPeople.rg" name="rg" class="form-control" maxlength="9" id="rg" placeholder="Informe o RG">
+         </div>
+     </div>
+       <div class="col-sm-4 col-md-4">
+         <div class="form-group"
+			  ng-class="{ 'has-error': dados.regions.$invalid && dados.regions.$dirty }">
+			    <label for="region">Selecione a Região<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="clickedPeople.regions" id="region" name="regions">			           
+						<option value="Agua da Anta">Agua da Anta</option>
+						<option value="Agua da Pintada">Agua da Pintada</option>
+						<option value="Agua do Cascudo">Agua do Cascudo</option>	
+						<option value="Agua do Milton">Agua do Milton</option>
+						<option value="Agua do Tentilhão">Agua do Tentilhão</option>
+						<option value="Agua do Bananeira">Agua do Bananeira</option>
+						<option value="Godoy Moreira Centro">Godoy Moreira Centro</option>
+			       </select>
+	        </div>
+        </div>
+  </div>
+  <button type="submit" data-dismiss="modal" ng-disabled="!clickedPeople.name" class="btn btn-primary">Editar</button>
+  <button type="submit" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+  </form>
+           </div>
+        </div>
+    </div>
+  </div>
+  
+     <div align="left">
+        <div>
+           <p><h4>Total</h4> registros ao todo</p>
+        </div>
+     </div>  
+     
+     <div align="center">
+        <pagination total-items="peoples.length" class="pagination-sm" ng-model="currentPage" items-per-page="pageSize"></pagination> 
+     </div>
+    <br/>
+	<br/>
+	<br/>
+    <footer align="center">
+        <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+    </footer>
+</div>
+

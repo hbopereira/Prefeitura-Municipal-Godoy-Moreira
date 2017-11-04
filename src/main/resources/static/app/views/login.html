@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div align="center">
+	   <img src="app/imagens/prefeitura-godoy-moreira.jpg" alt="Generic placeholder image" width="100" height="100"/>
+</div>
+<br/>
+ 
+<body>
+  <div class=" col-md-4 col-md-offset-4">
+	<div class="panel panel-default" style="background-color: #eee;">
+		<div align="center"  class="alert alert-warning" style="background-color: #feffct1;">
+		  <p style="font-weight: bold;">Preencha os campos para acessar o sistema<p>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-12">
+				<form name="dados" ng-submit="login()">
+					<div class="form-group has-feedback"  ng-class="{ 'has-error': dados.username.$invalid && dados.username.$dirty }">
+						<label for="username">Usuário:</label> 
+						<input type="txt" class="form-control validate" required="required" ng-model="username" id="username" name="username" placeholder="nome de usuário"> 
+						<span class="glyphicon glyphicon-user form-control-feedback"></span>
+					</div>
+					<div class="form-group has-feedback"  ng-class="{ 'has-error': dados.password.$invalid && dados.password.$dirty }">
+						<label for="pwd">Senha:</label> 
+						<input type="password"	class="form-control validate" required="required" id="pwd" ng-model="password" name="password" placeholder="senha">
+						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					</div>
+                    <div class="input-group">
+                       <div class="checkbox">
+                           <label>
+                              <input id="login-remember" type="checkbox" name="remember-me" value="1"> Lembrar-me
+                           </label>
+                       </div>
+                    </div>
+					<button type="submit" class="btn btn-primary btn-block">Acessar</button>
+
+					<div class="alert alert-danger margin-top-5" ng-show="message">{{message}}</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<hr class="featurette-divider"/>
+	 <footer align="center">
+        <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal de Godoy Moreira &middot;</p>
+    </footer> 
+  </div>
+</body>
+
+
+     

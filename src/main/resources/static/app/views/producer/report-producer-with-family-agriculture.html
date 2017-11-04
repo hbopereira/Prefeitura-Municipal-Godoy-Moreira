@@ -1,0 +1,98 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+    <h3 class="well lead" align="center">Produtores Agricultura Familiar</h3>
+    <br/>
+  <form class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+           <input type="text" ng-model="pesquisaProdutor" class="form-control" placeholder="Pesquisar...">
+       </div>
+           <button type="submit" class="btn btn-primary">Pesquisar</button>
+ </form> 
+ <br/>
+ <br/>
+ <br/>
+ <hr class="featurette-divider"/>
+ <div id="prodFamilyAgriculture">     
+   <div class="row"> 
+     <div class="col-sm-6 col-md-4">
+        <div>
+           <p><h4>DAP(s) Expiradas</h4> total: {{totProdExpiredDap}} registros </p>
+        </div>
+     </div>
+     <div class="col-sm-6 col-md-4">
+        <div>
+           <p><h4>DAP(s) Ativas</h4> total: {{totProdAtiveDap}} registros </p>
+        </div>
+     </div>
+      <div class="col-sm-6 col-md-3">
+        <div>
+           <p><h4>DAP(s) Canceladas</h4> total: {{totProdCanceledDap}} registros </p>
+        </div>
+     </div>    
+   </div>
+   <br/>
+   <br/>
+    <table align="center" id="prodFamily" class="table table-striped">
+     <thead>
+      <tr>
+         <th>Nome Produtor</th>
+         <th>Nascimento</th>
+         <th>CPF</th>
+         <th>RG</th>
+         <th>Cad-Pro</th>
+         <th>Cod-Incra</th>
+         <th>Status DAP</th>
+      </tr>
+     </thead> 
+       <tr ng-repeat="producer in producersFamily | filter: pesquisaProdutor">
+          <td>{{producer.name}}</td>
+          <td>{{producer.birth_date | date: 'dd/MM/yyyy'}}</td>
+          <td>{{producer.cpf}}</td>
+          <td>{{producer.rg}}</td>
+          <td>{{producer.cadPro}}</td>
+          <td>{{producer.cod_incra}}</td>
+          <td>
+            <span ng-repeat="sts in producer.status">{{sts}}</span>
+		  </td> 
+       </tr>
+    </table>
+     <br/>
+     <br/>
+   
+   <div align="left">
+        <div>
+           <p><h4>Total</h4> {{totProdFamily}} registros ao todo</p>
+        </div>
+   </div>
+</div>   
+   <div style="font-weight: bold;" align="center">
+	   <a href="javascript:HTMLtoPDF()">Gerar PDF</a>
+	   <br/>
+	   <br/>
+	   <button id="btnExport" class="btn btn-primary btn-sm">Gerar Excel</button>
+   </div>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <footer align="center">
+      <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+   </footer>
+   
+   <script>
+    $(document).ready(function () {
+        $("#btnExport").click(function () {
+            $("#prodFamily").btechco_excelexport({
+                containerid: "prodFamily"
+               , datatype: $datatype.Table
+               , filename: 'sample'
+            });
+        });
+    });
+</script>
+
+</body>

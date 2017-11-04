@@ -1,0 +1,146 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ <div class="container">
+   <div class="form-group">
+        <h3 class="well lead" align="center">Atividades Registradas</h3>
+           <div class="text-right">
+             <button type="button" class="btn btn-success btn-sm" ui-sref="new-activity">
+		       <span class="glyphicon glyphicon-plus"></span> Registrar Atividade
+	      </div>
+	     <br/>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                   <input type="text" ng-model="pesquisaAtividade" class="form-control" placeholder="Pesquisar..">
+                </div>
+                  <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </form> 
+      <br/>
+   </div>
+ </div> 
+  <script>
+ $(document).ready( function() {
+     $('#dataTable').dataTable();
+   } );
+ </script>
+ <hr class="featurette-divider"/>
+ <br/>
+    <div class="container">
+      <table class="table table-striped" id="dataTable">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Descrição</th>
+            <th>Detalhes</th>
+            <th>Tipo de Praga</th>
+            <th>Periodo Atividade</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead> 
+         <tbody>
+          <tr ng-repeat="activity in activities | filter: pesquisaAtividade | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
+             <td>{{activity.description}}</td>
+             <td>{{activity.details}}</td>
+             <td>{{activity.typePrague}}</td>
+             <td>
+                <span ng-repeat="per in activity.period">{{per}}</span>
+             </td>
+             <td>
+              <button title="Editar/Visualizar" type="button" class="btn btn-warning btn-sm"
+				data-toggle="modal" data-target="#confirmar" ng-click="selectActivity(activity)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td>
+             <td>
+			  <button title="Excluir" type="button" class="btn btn-danger btn-sm"
+			    ng-click="deleteActivity(activity)">
+				<span class="glyphicon glyphicon-trash"></span>
+			  </button>
+			</td>  
+          </tr>
+        </tbody> 
+     </table> 
+     <hr class="featurette-divider"/>
+          <!-- modal of exclusion of activity -->
+  <form>
+     <div class="modal fade" id="confirm" role="dialog" tabindex="-1">
+           <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                   <div class="modal-body">
+                       <p> Tem certeza que deseja excluir este registro ?</p>
+                   </div>
+                   <div class="modal-footer">
+                      <button type="submit" class="btn btn-danger">Sim</button>
+                      <button type="button" data-dismiss="modal" class="btn btn-warning">Não</button>
+                   </div>
+              </div>
+           </div>
+     </div>
+  </form>
+     <!-- modal of edtion of activity -->
+ <div class="modal fade" id="confirmar" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+               <p class="well lead" align="center">Controle de Atividade</p> 
+ <form name="dados" class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-md-6">
+        <div class="form-group">
+           <label for="Nome" class="required">Descrição<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedActivity.description" class="form-control" id="name" placeholder="Descrição">
+        </div>
+     </div>
+       <div class="col-md-6">
+        <div class="form-group">
+           <label for="NomeEsposa" class="required">Detalhes<em class="asterisco">*</em></label>
+           <textarea type="text" required="required" ng-model="clickedActivity.details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
+        </div>
+     </div>
+  </div>
+   <div class="row">
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.description.$invalid && dados.description.$dirty }">
+           <label for="Descricao" class="required">Tipo de Praga<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedActivity.typePrague" name="description" class="form-control" id="description" placeholder="Informe a Descrição">
+        </div>
+     </div>
+        <div class="col-md-6">
+           <div class="form-group"
+			  ng-class="{ 'has-error': dados.status.$invalid && dados.status.$dirty }">
+			    <label for="region">Periodo de Atividade<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="clickedActivity.period" id="status" name="status">
+						<option value="1 a 2 meses">1 a 2 meses</option>
+						<option value="1 a 3 meses">1 a 3 meses</option>
+						<option value="2 a 4 meses">2 a 4 meses</option>
+						<option value="2 a 5 meses">2 a 5 meses</option>
+			       </select>
+	        </div>
+     </div>
+  </div>   
+  <button type="submit" data-dismiss="modal" ng-disabled="!clickedActivity.description" class="btn btn-primary" ng-click="updateActivity()">Editar</button>
+  <button type="submit" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+       
+      </form>
+     </div>
+   </div>
+  </div>
+</div>
+     
+     <div align="left">
+        <div>
+           <p><h4>Total</h4> {{tot}} registros ao todo</p>
+        </div>
+     </div>
+     
+     <div align="center">
+        <pagination total-items="activities.length" class="pagination-sm" ng-model="currentPage" items-per-page="pageSize"></pagination> 
+     </div>
+     <br/>
+	 <br/>
+	 <br/>
+     <footer align="center">
+        <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+    </footer>
+    </div> 

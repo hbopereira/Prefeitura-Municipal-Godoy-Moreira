@@ -1,0 +1,218 @@
+<style>
+.user {
+	font-weight: bold;
+}
+
+.logout {
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+</style>
+
+ 
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<nav class="navbar navbar-default" style="background-color: #e3f2fd;">
+	<div>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			  <a class="navbar-brand" style="background-color: #ffbb3f;" ui-sref="home">Prefeitura</a>
+		</div>
+		
+<div id="navbar" class="navbar-collapse collapse">
+	<ul class="nav navbar-nav">
+			  <!--  <li ng-show="user.username"><a ui-sref="users">Usuários</a></li>-->      
+        <li class="dropdown" ng-show="user.username">
+            <a id="dLabel" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Secretarias <span class="caret"></span></a>
+    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+              <li class="dropdown-submenu">
+                  <a style="font-weight: bold;" tabindex="-1" href="#">Agricultura</a>
+                     <ul class="dropdown-menu">
+                         <li class="dropdown-header" style="font-weight: bold;">PRODUTOR</li>
+                         <li><a ui-sref="new-producer" style="font-weight: bold;">Registrar Produtor</a></li>
+                         <li><a ui-sref="registered-producers" style="font-weight: bold;">Produtores Registrados</a></li>
+
+                         <li role="separator" class="divider"></li>
+
+                         <li class="dropdown-header" style="font-weight: bold;">ATIVIDADE</li>
+                         <li><a ui-sref="new-activity" style="font-weight: bold;">Registrar Atividade</a></li>
+                         <li><a ui-sref="registered-activities" style="font-weight: bold;">Atividades Registradas</a></li>
+                    
+                         <li role="separator" class="divider"></li>
+                         
+                         <li class="dropdown-header" style="font-weight: bold;">PESSOAS DIVERSAS</li>                      
+                         <li><a ui-sref="registered-peoples" style="font-weight: bold;">Pessoas Registradas</a></li>
+                    
+                         <li role="separator" class="divider"></li>
+
+                         <li class="dropdown-header" style="font-weight: bold;">RELATÓRIOS</li>
+                         <li><a ui-sref="report-producer-act-region" style="font-weight: bold;">Produtores P/ Atividade e Região</a></li>
+                         <li><a ui-sref="report-producer-with-family-agriculture" style="font-weight: bold;">Produtores P/ Agricultura Familiar</a></li>
+                         <li><a ui-sref="report-producer-not-family-agriculture" style="font-weight: bold;">Produtores N/ Agricultura Familiar</a></li>
+                         <li><a ui-sref="report-attendance-date-period" style="font-weight: bold;">Atendimentos P/ Periodo de Data</a></li>
+                    
+                         <li role="separator" class="divider"></li>
+
+                         <li class="dropdown-header" style="font-weight: bold;">ATENDIMENTO</li>
+                         <li><a ui-sref="new-attendance-agriculture" style="font-weight: bold;">Registrar Atendimento</a></li>  
+                         <li><a ui-sref="historic-attendancies-agriculture" style="font-weight: bold;">Historico Atendimentos P/ Pessoa</a></li>                         
+                    </ul>
+              </li>
+              
+              <li class="divider"></li>
+              <li class="dropdown-submenu">
+                  <a style="font-weight: bold;" tabindex="-1" href="#">Esporte</a>
+                    <ul class="dropdown-menu">
+                         <li class="dropdown-header" style="font-weight: bold;">ATLETA</li>
+                         <li><a ui-sref="new-athlete" style="font-weight: bold;">Registrar Atleta</a></li>
+                         <li><a ui-sref="registered-athletes" style="font-weight: bold;">Atletas Registrados</a></li>
+
+                         <li role="separator" class="divider"></li>       
+                         
+                         <li class="dropdown-header" style="font-weight: bold;">PESSOAS DIVERSAS</li>                      
+                         <li><a style="font-weight: bold;">Pessoas Registradas</a></li>
+                    
+                         <li role="separator" class="divider"></li>
+                    
+                         <li class="dropdown-header" style="font-weight: bold;">RELATÓRIOS</li>
+                         <li><a style="font-weight: bold;">Atletas por P/ Data Nascimento</a></li>
+                         <li><a style="font-weight: bold;">Atletas por Categoria</a></li>
+                         
+                          <li role="separator" class="divider"></li>
+
+                         <li class="dropdown-header" style="font-weight: bold;">ATENDIMENTO</li>
+                         <li><a ui-sref="new-attendance-sport" style="font-weight: bold;">Registrar Atendimento(Horarios)</a></li>
+                         <li><a ui-sref="historic-attendancies-sport" style="font-weight: bold;">Historico Atendimentos P/ Pessoa</a></li>       
+                   </ul>
+              </li>
+            </ul>           
+        </li>
+               
+        <li class="dropdown" ng-show="user.username">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Agenda <span class="caret"></span></a>
+               <ul class="dropdown-menu">
+                    <li class="dropdown-header" style="font-weight: bold;">COMPROMISSO</li>
+                    <li><a style="font-weight: bold;">Registrar Compromisso</a></li>
+                    <li><a style="font-weight: bold;">Compromissos Registrados</a></li>                  
+
+                    <li role="separator" class="divider"></li>
+
+                    <li class="dropdown-header" style="font-weight: bold;">RELATORIOS</li>
+                    <li><a style="font-weight: bold;">Compromissos P/ Data Agendamento</a></li>               
+              </ul>
+         </li>
+              
+                <!--  <li ng-show="user.username"><a ui-sref="registered-attendancies">Atendimentos</a></li>-->
+               
+	</ul>
+	<div class="container">
+		<ul class="nav navbar-nav navbar-right">
+		   <li ng-show="user.username"><a> <span class="user">Olá,
+				{{user.name}}</span> <span ng-click="logout()" href=""
+				class="logout">Sair</span>
+				</a></li>
+		</ul>
+      </div>	
+	</div>
+		<!--/.nav-collapse  -->
+ </div>
+</nav>
+
+ <ol ng-show="user.username" class="breadcrumb">
+  <li class="breadcrumb-item"><a style="font-weight: bold;">ATENDIMENTOS</a></li>
+  <li class="dropdown">
+     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Agricultura <span class="caret"></span></a>
+           <ul class="dropdown-menu">
+                 <li class="dropdown-header" style="font-weight: bold;">Atendimentos Registrados</li>
+                 <li><a ui-sref="attendancies-progress-agriculture" style="font-weight: bold;">Em Andamento</a></li>
+                 <li><a ui-sref="attendancies-not-finish-agriculture"  style="font-weight: bold;">Não Concluido</a></li>
+                 <li><a ui-sref="attendancies-finally-agriculture"  style="font-weight: bold;">Finalizados</a></li>                                                    
+           </ul>
+  </li>
+  <li class="dropdown">
+     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Esporte <span class="caret"></span></a>
+           <ul class="dropdown-menu">
+                 <li class="dropdown-header" style="font-weight: bold;">Atendimentos Registrados</li>
+                 <li><a ui-sref="attendancies-progress-sport" style="font-weight: bold;">Em Andamento</a></li>
+                 <li><a ui-sref="attendancies-not-finish-sport" style="font-weight: bold;">Não Concluido</a></li>
+                 <li><a ui-sref="attendancies-finally-sport" style="font-weight: bold;">Finalizados</a></li>                                                    
+           </ul>
+  </li>
+</ol>
+
+<nav class="navbar navbar-default sidebar" role="navigation" ng-show="user.username">
+    <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">Opções</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold;">Usuários <span class="caret"></span><span style="font-size:16px;" style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a ui-sref="new-user" style="font-weight: bold;">Registrar Usuário</a></li>
+						<li><a ui-sref="registered-users" style="font-weight: bold;">Usuários Registrados</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold;">Protocolos <span class="caret"></span><span style="font-size:16px;" style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a style="font-weight: bold;">Anexar Arquivo</a></li>
+						<li><a style="font-weight: bold;">Arquivos Anexados</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="main">
+<!-- Content Here -->
+</div>
+<script>
+function htmlbodyHeightUpdate(){
+	var height3 = $( window ).height()
+	var height1 = $('.nav').height()+50
+	height2 = $('.main').height()
+	if(height2 > height3){
+		$('html').height(Math.max(height1,height3,height2)+10);
+		$('body').height(Math.max(height1,height3,height2)+10);
+	}
+	else
+	{
+		$('html').height(Math.max(height1,height3,height2));
+		$('body').height(Math.max(height1,height3,height2));
+	}
+	
+}
+$(document).ready(function () {
+	htmlbodyHeightUpdate()
+	$( window ).resize(function() {
+		htmlbodyHeightUpdate()
+	});
+	$( window ).scroll(function() {
+		height2 = $('.main').height()
+			htmlbodyHeightUpdate()
+	});
+});
+
+</script>
+
