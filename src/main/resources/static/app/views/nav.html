@@ -52,7 +52,7 @@
                          <li role="separator" class="divider"></li>
                          
                          <li class="dropdown-header" style="font-weight: bold;">PESSOAS DIVERSAS</li>                      
-                         <li><a ui-sref="registered-peoples" style="font-weight: bold;">Pessoas Registradas</a></li>
+                         <li><a ui-sref="registered-peoples-agriculture" style="font-weight: bold;">Pessoas Registradas</a></li>
                     
                          <li role="separator" class="divider"></li>
 
@@ -81,7 +81,7 @@
                          <li role="separator" class="divider"></li>       
                          
                          <li class="dropdown-header" style="font-weight: bold;">PESSOAS DIVERSAS</li>                      
-                         <li><a style="font-weight: bold;">Pessoas Registradas</a></li>
+                         <li><a ui-sref="registered-peoples-sport"  style="font-weight: bold;">Pessoas Registradas</a></li>
                     
                          <li role="separator" class="divider"></li>
                     
@@ -122,6 +122,7 @@
 				{{user.name}}</span> <span ng-click="logout()" href=""
 				class="logout">Sair</span>
 				</a></li>
+		   <li ng-show="!user.username"><a style="font-weight: bold;" ui-sref="register">Registrar-se</a></li>		
 		</ul>
       </div>	
 	</div>

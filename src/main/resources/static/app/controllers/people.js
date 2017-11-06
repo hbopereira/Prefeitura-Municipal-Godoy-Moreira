@@ -15,22 +15,38 @@ angular.module('JWTDemoApp')
 		});
 	};
 	
-	var getPeoples = function() {
-		$http.get('People').success(function(res) {
-			$scope.peoples = res;
+	var getPeoplesAgriculture = function() {
+		$http.get('People/getPeopleFromAgriculture').success(function(res) {
+			$scope.peoplesFromAgriculture = res;
 			//$scope.dados.$setPristine();
 			$scope.message='';
 			$scope.people = null;
+				
 		}).error(function(error) {
 			$scope.message = error.message;
 		});
 	};
+	
+	var getPeoplesSport = function() {
+		$http.get('People/getPeopleFromSport').success(function(res) {
+			$scope.peoplesFromSport = res;
+			//$scope.dados.$setPristine();
+			$scope.message='';
+			$scope.people = null;
+				
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	
 	
 	$scope.selectPeople = function(people){
 		console.log(people);
 		$scope.clickedPeople = people;
 	}
 	
-	getPeoples();
+	getPeoplesSport();
+	getPeoplesAgriculture();
 	
 })

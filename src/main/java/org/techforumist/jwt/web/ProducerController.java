@@ -119,10 +119,45 @@ public class ProducerController {
 		return tot;
 	}
 	
-	@RequestMapping(value="/totProdAct", method=RequestMethod.GET)
-	public Integer getProdAct(){
-		Integer tot = prodRepo.countActFromProducer();
+	@RequestMapping(value="/totProdAct1", method=RequestMethod.GET)
+	public Integer getProdAct1(){
+		Integer tot = prodRepo.countActFromProducer1();
 		return tot;
 	}
+	
+	@RequestMapping(value="/totProdAct2", method=RequestMethod.GET)
+	public Integer getProdAct2(){
+		Integer tot = prodRepo.countActFromProducer2();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totProdAct3", method=RequestMethod.GET)
+	public Integer getProdAct3(){
+		Integer tot = prodRepo.countActFromProducer3();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totProdAct4", method=RequestMethod.GET)
+	public Integer getProdAct4(){
+		Integer tot = prodRepo.countActFromProducer4();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totProdAct5", method=RequestMethod.GET)
+	public Integer getProdAct5(){
+		Integer tot = prodRepo.countActFromProducer5();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totProdAct6", method=RequestMethod.GET)
+	public Integer getProdAct6(){
+		Integer tot = prodRepo.countActFromProducer6();
+		return tot;
+	}
+	
+	
+	
+	
+	
 	
 }

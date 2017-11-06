@@ -134,17 +134,6 @@ angular.module('JWTDemoApp')
 		});
 	};
 	
-	var getTotActFromProducer = function(){
-		$http.get('Producer/totProdAct').success(function(res) {
-			$scope.totProdAct = res;
-			console.log($scope.tot);
-			//$scope.dados.$setPristine();
-			$scope.message='';		
-		}).error(function(error) {
-			$scope.message = error.message;
-		});
-	};
-	
 	$scope.selectProducer = function(producer){
 		console.log(producer);
 		//edit = true;
@@ -172,6 +161,77 @@ angular.module('JWTDemoApp')
 		});
 	}
 	
+	var getTotActFromProducer1 = function(){
+		$http.get('Producer/totProdAct1').success(function(res) {
+			$scope.totProdAct1 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	
+	var getTotActFromProducer2 = function(){
+		$http.get('Producer/totProdAct2').success(function(res) {
+			$scope.totProdAct2 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getTotActFromProducer3 = function(){
+		$http.get('Producer/totProdAct3').success(function(res) {
+			$scope.totProdAct3 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getTotActFromProducer4 = function(){
+		$http.get('Producer/totProdAct4').success(function(res) {
+			$scope.totProdAct4 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getTotActFromProducer5 = function(){
+		$http.get('Producer/totProdAct5').success(function(res) {
+			$scope.totProdAct5 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getTotActFromProducer6 = function(){
+		$http.get('Producer/totProdAct6').success(function(res) {
+			$scope.totProdAct6 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	
+	
+	
+	
 	getProducers();
 	getAllActivities();
 	getTotProducers();
@@ -182,6 +242,11 @@ angular.module('JWTDemoApp')
 	getTotProducersExpiredDap();
 	getTotProducersAtiveDap();
 	getTotProducersCanceledDap();
-	getTotActFromProducer();
+	getTotActFromProducer1();
+	getTotActFromProducer2();
+	getTotActFromProducer3();
+	getTotActFromProducer4();
+	getTotActFromProducer5();
+	getTotActFromProducer6();
 	
 });

@@ -6,7 +6,7 @@ angular.module('JWTDemoApp')
 			$scope.appUser = null;
 			$scope.confirmPassword = null;
 			$scope.register.$setPristine();
-			$scope.message = "Registration successfull !";
+			$scope.message = "Cadastro Realizado com Sucesso !";
 		}).error(function(error) {
 			$scope.message = error.message;
 		});

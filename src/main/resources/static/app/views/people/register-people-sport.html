@@ -1,0 +1,109 @@
+<style>
+em{
+	color: red;
+}
+
+</style>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container"> 
+ <h3 class="well lead" align="center">Nova Pessoa</h3>
+  <div class="text-right">
+       <button type="button" class="btn btn-success btn-sm" ui-sref="new-attendance-sport">
+		 <span class="glyphicon glyphicon-plus"></span> Registrar Atendimento
+	   </button>
+  </div>
+  <hr class="featurette-divider"/>
+  <br/>
+  <form name="dados" ng-submit="savePeople()" class="alert alert-warning" role="alert">
+  <div class="row">
+     <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+           <label for="Nome" class="required">Nome<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="people.name" name="name" class="form-control" id="name" placeholder="Informe o Nome">
+        </div>
+     </div>
+    <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.birthDate.$invalid && dados.birthDate.$dirty }">
+           <label for="birthDate"class="required">Data Nascimento<em class="asterisco">*</em></label>
+           <input type="Date" required="required" ng-model="people.birth_date" name="birthDate" class="form-control" id="birthDate" placeholder="Informe a Data Nascimento">
+        </div>
+    </div>
+     <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Sexo<em class="asterisco">*</em></label>
+           <br/> 
+           <label class="rario-inline">Masculino</label>
+           <input required="required" type="radio" name="sexo" ng-model="people.sexo" value="MASCULINO">
+           <label class="rario-inline">Feminino</label>
+           <input required="required" type="radio" name="sexo" ng-model="people.sexo" value="FEMININO">
+        </div>
+      </div> 
+  </div>
+   <div class="row">
+     <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameFather.$invalid && dados.nameFather.$dirty }">
+           <label for="nameFather" class="required">Nome Pai<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="people.nameFather" name="nameFather" class="form-control" id="nameFather" placeholder="Informe o Nome do Pai">
+        </div>
+     </div>
+      <div class="col-md-6">
+        <div class="form-group"  ng-class="{ 'has-error': dados.nameMother.$invalid && dados.nameMother.$dirty }">
+           <label for="nameFather" class="required">Nome Mãe<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="people.nameMother" name="nameMother" class="form-control" id="nameMother" placeholder="Informe o Nome da Mãe">
+        </div>
+     </div>
+  </div> 
+   <div class="row">
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.cpf.$invalid && dados.cpf.$dirty }">
+           <label for="CPF"class="required">CPF<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="people.cpf" name="cpf" class="form-control" maxlength="11" id="cpf" placeholder="Informe o CPF">
+        </div>
+    </div>
+     <div class="col-sm-4 col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.rg.$invalid && dados.rg.$dirty }">
+           <label for="RG" class="required">RG<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="people.rg" name="rg" class="form-control" maxlength="9" id="rg" placeholder="Informe o RG">
+         </div>
+     </div>
+       <div class="col-sm-4 col-md-4">
+         <div class="form-group"
+			  ng-class="{ 'has-error': dados.regions.$invalid && dados.regions.$dirty }">
+			    <label for="region">Selecione a Região<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="people.regions" id="region" name="regions">			           
+						<option value="Agua da Anta">Agua da Anta</option>
+						<option value="Agua da Pintada">Agua da Pintada</option>
+						<option value="Agua do Cascudo">Agua do Cascudo</option>	
+						<option value="Agua do Milton">Agua do Milton</option>
+						<option value="Agua do Tentilhão">Agua do Tentilhão</option>
+						<option value="Agua do Bananeira">Agua do Bananeira</option>
+						<option value="Godoy Moreira Centro">Godoy Moreira Centro</option>
+			       </select>
+	        </div>
+        </div>
+  </div> 
+  <div class="row">
+     <div class="col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
+           <br/> 
+           <br/>
+           <label class="rario-inline">Esporte</label>
+           <input required="required" type="radio" name="sector" ng-model="people.sector" value="ESPORTE">         
+        </div>
+   </div>
+  </div> 
+  <button type="submit" ng-disabled="!people.name" class="btn btn-primary">Salvar</button>
+  <button type="submit" ng-click="limparCampos()" class="btn btn-warning">Cancelar</button>    
+  </form>
+  <hr class="featurette-divider"/>
+  <br>
+
+  <footer align="center">
+        <p>&copy; 2017 Todos os diretos reservados a Prefeitura Municipal &middot;</p>
+  </footer>
+ </div>

@@ -91,6 +91,15 @@ angular.module('JWTDemoApp')
 				controller : 'ActivityController'
 			}
 		}
+	}).state('register', {
+		parent : 'nav',
+		url : '/registrar-usuario',
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/register.html',
+				controller : 'RegisterController'
+			}
+		}
 	}).state('new-user', {
 		parent : 'nav',
 		url : '/novo-usuario',
@@ -292,27 +301,51 @@ angular.module('JWTDemoApp')
 				controller : 'AttendanceController'
 			}
 		}
-  }).state('register-people', {
+  }).state('register-people-agriculture', {
 		parent : 'nav',
-		url : '/registrar-pessoa',
+		url : '/registrar-pessoa-agricultura',
 		data : {
 		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/people/register-people.html',
+				templateUrl : 'app/views/people/register-people-agriculture.html',
 				controller : 'PeopleController'
 			}
 		}
- }).state('registered-peoples', {
+ }).state('registered-peoples-agriculture', {
 		parent : 'nav',
-		url : '/pessoas-registradas',
+		url : '/pessoas-registradas-agricultura',
 		data : {
 		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/people/registered-peoples.html',
+				templateUrl : 'app/views/people/registered-peoples-agriculture.html',
+				controller : 'PeopleController'
+			}
+		}
+ }).state('register-people-sport', {
+		parent : 'nav',
+		url : '/registrar-pessoa-esporte',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/people/register-people-sport.html',
+				controller : 'PeopleController'
+			}
+		}
+ }).state('registered-peoples-sport', {
+		parent : 'nav',
+		url : '/pessoas-registradas-esporte',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/people/registered-peoples-sport.html',
 				controller : 'PeopleController'
 			}
 		}

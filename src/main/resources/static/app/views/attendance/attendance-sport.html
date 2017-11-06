@@ -12,7 +12,7 @@ em{
 <div class="container"> 
  <h3 class="well lead" align="center">Novo Atendimento</h3>
   <div class="text-right">
-       <button type="button" class="btn btn-success btn-sm" ui-sref="register-people">
+       <button type="button" class="btn btn-success btn-sm" ui-sref="register-people-sport">
 		 <span class="glyphicon glyphicon-plus"></span> Registrar Pessoa
 	   </button>
   </div>
@@ -70,7 +70,7 @@ em{
             <th></th>
           </tr>
         </thead> 
-          <tr ng-repeat="people in peoples | filter: pesquisa | limitTo: 1">
+          <tr ng-repeat="people in peoplesFromSport | filter: pesquisa | limitTo: 1">
              <td>{{people.name}}</td>
              <td>{{people.birth_date | date: 'dd/MM/yyyy'}}</td>
              <td>{{people.cpf}}</td>                 

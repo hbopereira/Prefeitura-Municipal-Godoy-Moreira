@@ -58,7 +58,37 @@ public interface ProducerRepository extends JpaRepository<Producer,Long> {
 			   + " INNER JOIN producer_activity pa ON pa.producer_id = tp.id "
 			   + " INNER JOIN tbl_activity ta ON ta.id = pa.activity_id"
 			   + " WHERE ta.acti_description = 'Mandioca' ", nativeQuery = true)
-	public Integer countActFromProducer();
+	public Integer countActFromProducer1();
+	
+	@Query(value=" SELECT COUNT(*) FROM tbl_producer tp "
+			   + " INNER JOIN producer_activity pa ON pa.producer_id = tp.id "
+			   + " INNER JOIN tbl_activity ta ON ta.id = pa.activity_id"
+			   + " WHERE ta.acti_description = 'Maracuja' ", nativeQuery = true)
+	public Integer countActFromProducer2();
+	
+	@Query(value=" SELECT COUNT(*) FROM tbl_producer tp "
+			   + " INNER JOIN producer_activity pa ON pa.producer_id = tp.id "
+			   + " INNER JOIN tbl_activity ta ON ta.id = pa.activity_id"
+			   + " WHERE ta.acti_description = 'Morango' ", nativeQuery = true)
+	public Integer countActFromProducer3();
+	
+	@Query(value=" SELECT COUNT(*) FROM tbl_producer tp "
+			   + " INNER JOIN producer_activity pa ON pa.producer_id = tp.id "
+			   + " INNER JOIN tbl_activity ta ON ta.id = pa.activity_id"
+			   + " WHERE ta.acti_description = 'Gado Corte' ", nativeQuery = true)
+	public Integer countActFromProducer4();
+	
+	@Query(value=" SELECT COUNT(*) FROM tbl_producer tp "
+			   + " INNER JOIN producer_activity pa ON pa.producer_id = tp.id "
+			   + " INNER JOIN tbl_activity ta ON ta.id = pa.activity_id"
+			   + " WHERE ta.acti_description = 'Gado Leite' ", nativeQuery = true)
+	public Integer countActFromProducer5();
+	
+	@Query(value=" SELECT COUNT(*) FROM tbl_producer tp "
+			   + " INNER JOIN producer_activity pa ON pa.producer_id = tp.id "
+			   + " INNER JOIN tbl_activity ta ON ta.id = pa.activity_id"
+			   + " WHERE ta.acti_description = 'Gado Recrio' ", nativeQuery = true)
+	public Integer countActFromProducer6();
 	
 	
 }
