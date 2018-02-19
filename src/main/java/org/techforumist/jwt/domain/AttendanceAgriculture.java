@@ -19,8 +19,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import org.techforumist.jwt.enums.Deadline;
 import org.techforumist.jwt.enums.Sector;
 import org.techforumist.jwt.enums.Sexo;
 
@@ -36,44 +34,20 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@Table(name="tbl_attendance")
-public class Attendance implements Serializable {
+@Table(name="tbl_attendance_Agriculture")
+public class AttendanceAgriculture implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@OneToOne
 	@JoinColumn
-	private Producer producer;
-	
-	@OneToOne
-	@JoinColumn
-	private Athlete athlete;
-	
-    @OneToOne
-    @JoinColumn
-    private People people;	
-    
-	@Column(name="att_sector")
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private Sector sector;
-	
-	@Column(name="att_deadline")
-	@Enumerated(EnumType.STRING)
-	private Deadline deadline;
+	private Order order;
 	
 	@ElementCollection
 	private List<String> status = new ArrayList<String>();
 	
 	@ElementCollection
 	private List<String> nameEmployee = new ArrayList<String>();
-	
-	@ElementCollection
-	private List<String> typeService = new ArrayList<String>();
-	
-	@ElementCollection
-	private List<String> descTypeService = new ArrayList<String>();
-	
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -82,12 +56,6 @@ public class Attendance implements Serializable {
 	@Column(name="at_cancellation_reason")
 	private String cancelattionReason;
 	
-    @Column(name="at_day_time")
-	private Date dayTime;
-	
-    @Column(name="at_time_Day")
-	private String timeOfDay;
-	
 	@Column(name="at_details")
 	@NotNull
 	private String details;
@@ -95,8 +63,11 @@ public class Attendance implements Serializable {
 	@Column(name="at_dayattendance")
 	private Date day_attendance;
 	
+	@Column(name="at_plannedDay")
+	private Date plannedDay;
+	
 	@Column(name="at_timeattendance")
-	private Date time_attendance;
+	private String time_attendance;
 	
 	@Column(name="at_datefinally")
 	private Date dateFinally;
@@ -152,13 +123,13 @@ public class Attendance implements Serializable {
 		this.day_attendance = day_attendance;
 	}
 
-	public Date getTime_attendance() {
+	public String getTime_attendance() {
 		return time_attendance;
 	}
 
-	public void setTime_attendance(Date time_attendance) {
-		Date dateTime = new Date(time_attendance.getTime());
-		this.time_attendance = dateTime;
+	public void setTime_attendance(String time_attendance) {
+		//Date dateTime = new Date(time_attendance.getTime());
+		this.time_attendance = time_attendance;
 		
 	}
 
@@ -169,82 +140,25 @@ public class Attendance implements Serializable {
 	public void setCancelattionReason(String cancelattionReason) {
 		this.cancelattionReason = cancelattionReason;
 	}
-	
-	public List<String> getTypeService() {
-		return typeService;
-	}
-
-	public void setTypeService(List<String> typeService) {
-		this.typeService = typeService;
-	}
-
-	public List<String> getDescTypeService() {
-		return descTypeService;
-	}
-
-	public void setDescTypeService(List<String> descTypeService) {
-		this.descTypeService = descTypeService;
-	}
-
-	public Sector getSector() {
-		return sector;
-	}
-
-	public void setSector(Sector sector) {
-		this.sector = sector;
-	}
-
-	public Deadline getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(Deadline deadline) {
-		this.deadline = deadline;
-	}
-
-	public People getPeople() {
-		return people;
-	}
-
-	public void setPeople(People people) {
-		this.people = people;
-	}
-
-	public Producer getProducer() {
-		return producer;
-	}
-
-	public void setProducer(Producer producer) {
-		this.producer = producer;
-    }
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-
-	public Date getDayTime() {
-		return dayTime;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setDayTime(Date dayTime) {
-		this.dayTime = dayTime;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
-	public String getTimeOfDay() {
-		return timeOfDay;
+	public Date getPlannedDay() {
+		return plannedDay;
 	}
 
-	public void setTimeOfDay(String timeOfDay) {
-		this.timeOfDay = timeOfDay;
-	}
-
-	public Athlete getAthlete() {
-		return athlete;
-	}
-
-	public void setAthlete(Athlete athlete) {
-		this.athlete = athlete;
+	public void setPlannedDay(Date plannedDay) {
+		this.plannedDay = plannedDay;
 	}
 	
 	

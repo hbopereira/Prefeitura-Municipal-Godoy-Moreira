@@ -218,4 +218,44 @@
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+
+#rodape_software {
+	width:1200px;
+	heigth:200px;
+	background:#00ffff;
+	clear:both;
+}
+
+.login-page
+{
+    background-image:  linear-gradient(red, yellow, green);
+    background-repeat: no-repeat;
+    background-size:100%;
+    bottom: 0;
+    color: black;
+    left: 0;
+    overflow: auto;
+    padding: 3em;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+
+}
+.login-page h1
+{
+    font-weight: 300;
+}
+.login-page h1 small
+{
+    color: gray;
+}
+.login-page .form-group
+{
+    padding: 8px 0;
+}
+.login-page .form-content
+{
+    padding: 40px 0;
+}
 	

@@ -10,8 +10,5 @@ import org.techforumist.jwt.domain.Activity;
 public interface ActivityRepository extends JpaRepository<Activity,Long> {
 
 	public Activity findOneByDescription(String description);
-	
-	@Query(value="SELECT COUNT(*) FROM tbl_activity", nativeQuery = true)
-	public Integer getRegisters();
 
 }

@@ -1,0 +1,68 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+    <h3 class="well lead" align="center">Atletas data Nascimento</h3>
+    <br/>
+    <form class="navbar-form navbar-right" role="search">
+       <div align="center" class="form-group">
+           <input type="date" ng-model="pesquisaAtleta" class="form-control" placeholder="Pesquisar...">
+        </div>
+           <button type="submit" class="btn btn-primary">Pesquisar</button>
+    </form>
+   <br/>
+   <br/>
+   <br/>
+   <hr class="featurette-divider"/>
+   <br/>
+   <br/>
+  <div id="prodFamilyAgriculture">  
+    <table align="center" id="prodFamily" class="table table-striped">
+     <thead>
+      <tr>
+         <th>Nome Atleta</th>
+         <th>Nascimento</th>
+         <th>CPF</th>
+         <th>RG</th>
+         <th>Nome Mãe</th>
+         <th>Nome Pai</th>
+         <th>Categoria</th>
+      </tr>
+     </thead> 
+       <tr ng-repeat="athlete in athletesFiltered = ( athletes | filter: pesquisaAtleta) ">
+          <td>{{athlete.name}}</td>
+          <td>{{athlete.birthDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{athlete.cpf}}</td>
+          <td>{{athlete.rg}}</td>
+          <td>{{athlete.nameMother}}</td>
+          <td>{{athlete.nameFather}}</td>
+          <td>
+            <span ng-repeat="cat in athlete.categories">{{cat}}</span>
+		  </td>
+       </tr>
+    </table>
+     <br/>
+     <br/>
+   </div>
+   
+   <div align="left">
+        <div>
+           <p><h4>Total</h4> {{athletesFiltered.length}} registros ao todo</p>
+        </div>
+   </div>
+   
+    <div style="font-weight: bold;" align="center">
+	   <a href="javascript:HTMLtoPDF()">Gerar PDF</a>
+   </div>
+         
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <footer align="center">
+      <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+   </footer>
+
+</body>

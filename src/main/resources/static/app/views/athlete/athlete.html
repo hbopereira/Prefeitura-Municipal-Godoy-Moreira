@@ -11,6 +11,9 @@
   </div>
   <hr class="featurette-divider"/>
   <br/>
+  <div class="alert alert-danger">
+     <strong>Atenção:</strong>Veficar se o(a) Atleta a ser cadastrado ja possui cadastro em algum outro setor !
+  </div>
   <form name="dados" ng-submit="saveAthlete()" class="alert alert-warning" role="alert">
   <div class="row">
      <div class="col-md-4">
@@ -51,19 +54,35 @@
      </div>
   </div> 
    <div class="row">
-     <div class="col-sm-4 col-md-4">
+     <div class="col-sm-4 col-md-6">
         <div class="form-group"  ng-class="{ 'has-error': dados.cpf.$invalid && dados.cpf.$dirty }">
            <label for="CPF"class="required">CPF<em class="asterisco">*</em></label>
            <input type="text" required="required" ng-model="athlete.cpf" name="cpf" class="form-control" maxlength="11" id="cpf" placeholder="Informe o CPF">
         </div>
     </div>
-     <div class="col-sm-4 col-md-4">
+     <div class="col-sm-4 col-md-6">
          <div class="form-group"  ng-class="{ 'has-error': dados.rg.$invalid && dados.rg.$dirty }">
            <label for="RG" class="required">RG<em class="asterisco">*</em></label>
            <input type="text" required="required" ng-model="athlete.rg" name="rg" class="form-control" maxlength="9" id="rg" placeholder="Informe o RG">
          </div>
      </div>
-       <div class="col-sm-4 col-md-4">
+  </div> 
+  <div class="row">
+       <div class="col-md-6">
+           <div class="form-group"
+			  ng-class="{ 'has-error': dados.categories.$invalid && dados.categories.$dirty }">
+			    <label for="category">Categoria<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="athlete.categories" id="category" name="categories">
+			            <option value="Veterano">Veterano</option>
+			              <option value="Sub 20">Sub 20</option>
+			            <option value="Sub 17">Sub 17</option>
+						<option value="Mirim">Mirim</option>
+						<option value="Pré Mirim">Pré Mirim</option>
+						<option value="Veterano">Fraldinha</option>
+			       </select>
+	        </div>
+       </div>
+       <div class="col-sm-4 col-md-6">
          <div class="form-group"
 			  ng-class="{ 'has-error': dados.regions.$invalid && dados.regions.$dirty }">
 			    <label for="region">Selecione a Região<em class="asterisco">*</em></label>
@@ -78,22 +97,6 @@
 			       </select>
 	        </div>
         </div>
-  </div> 
-  <div class="row">
-       <div class="col-md-4">
-           <div class="form-group"
-			  ng-class="{ 'has-error': dados.categories.$invalid && dados.categories.$dirty }">
-			    <label for="category">Categoria<em class="asterisco">*</em></label>
-			       <select required multiple="multiple" class="form-control" ng-model="athlete.categories" id="category" name="categories">
-			            <option value="Veterano">Veterano</option>
-			              <option value="Sub 20">Sub 20</option>
-			            <option value="Sub 17">Sub 17</option>
-						<option value="Mirim">Mirim</option>
-						<option value="Pré Mirim">Pré Mirim</option>
-						<option value="Veterano">Fraldinha</option>
-			       </select>
-	        </div>
-     </div>
   </div> 
   <button type="submit" ng-disabled="!athlete.name" class="btn btn-primary">Salvar</button>
   <button type="submit" ng-click="limparCampos()" class="btn btn-warning">Cancelar</button>    

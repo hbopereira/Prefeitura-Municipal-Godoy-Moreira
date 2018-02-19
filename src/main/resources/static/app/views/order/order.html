@@ -10,7 +10,7 @@ em{
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <div class="container"> 
- <h3 class="well lead" align="center">Novo Atendimento</h3>
+ <h3 class="well lead" align="center">Novo Pedido(Controle Trator)</h3>
   <div class="text-right">
        <button type="button" class="btn btn-success btn-sm" ui-sref="register-people-agriculture">
 		 <span class="glyphicon glyphicon-plus"></span> Registrar Pessoa
@@ -360,131 +360,104 @@ em{
      
   <hr class="featurette-divider"/> 
   <br/>
-<div class="alert alert-danger">
-  <strong>Atenção:</strong> Os campos tipo Maquinario e Detalhes só deverão ser preênchidos após a escolha do serviço agendamento de maquinário !.
-</div>
-  <form name="dados" id="cadastroAtendimento" ng-submit="saveAttendance()" class="alert alert-warning" role="alert">
-  <div class="row">
-     <div class="col-sm-4 col-md-4">
-           <div class="form-group"
-	        ng-class="{ 'has-error': dados.ageMachine.$invalid && dados.ageMachine.$dirty }">
-			   <label for="employee">Serviços Oferecidos<em class="asterisco">*</em></label>
-			     <select multiple="multiple" class="form-control" ng-model="attendance.typeService" id="types" name="types">
-				     <option value="Agendamento de Maquinario">Agendamento de Maquinario</option>
-				     <option value="Assistencia Tecnica">Assistência Técnica</option>				   				 
-			     </select>
-	        </div>
-     </div>
-     <div class="col-sm-4 col-md-4">
-           <div class="form-group"
-	        ng-class="{ 'has-error': dados.ageMachine.$invalid && dados.ageMachine.$dirty }">
-			   <label for="employee">Tipo Maquinario</label>
-			     <select multiple="multiple" class="form-control" ng-disabled="!attendance.typeService" ng-model="attendance.descTypeService" id="desc" name="desc">
-				     <option value="Maquinario Patrola">Maquinario Patrola</option>
-				     <option value="Maquinario Retro Escavadeira">Maquinario Retro Escavadeira</option>		
-				     <option value="Maquinario Pazinha">Maquinario Pazinha</option>		
-				     <option value="Maquinario Trator Esteira">Maquinario Trator Esteira</option>				 
-			     </select>
-	        </div>
-     </div>
-     <div class="col-sm-4 col-md-4">
-        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
-           <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
-           <textarea type="text" ng-model="attendance.details" name="details" id="Details" 
-           class="form-control margim-bottom" rows="4" placeholder="Informe aqui os detalhes para ambos os serviços, tais como tempo duração e região "></textarea>
-        </div>
-     </div>
-  </div> 
+  <form name="dados" id="cadastroAtendimento" ng-submit="saveOrder()" class="alert alert-warning" role="alert"> 
    <div class="row">
-     <div class="col-sm-4 col-md-4">
-         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
-           <label for="diaAtendimento" class="required">Dia Atendimento<em class="asterisco">*</em></label>
-           <input type="date" required="required" class="form-control" ng-model="attendance.day_attendance" name="day_attendance" id="dayAttendance" placeholder="Informe o Dia do Atendimento">
+     <div class="col-sm-4 col-md-3">
+        <div class="form-group"  ng-class="{ 'has-error': dados.time_attendance.$invalid && dados.time_attendance.$dirty }">
+           <label for="horaAtendimento" class="required">Numero Pedido<em class="asterisco">*</em></label>
+           <input type="text" class="form-control" ng-model="order.numberOrder" name="time_attendance" id="timeAttendance" placeholder="Informe o numero do pedido">
         </div>
      </div>
+     <div class="col-sm-4 col-md-3">
+         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
+           <label for="diaAtendimento" class="required">Dia Pedido<em class="asterisco">*</em></label>
+           <input type="date" required="required" class="form-control" ng-model="order.dateOrder" name="day_attendance" id="dayAttendance" placeholder="Informe o Dia do Atendimento">
+        </div>
+     </div>
+    <div class="col-sm-4 col-md-3">
+        <div class="form-group"
+			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+			    <label for="status">Tipo Maquinario<em class="asterisco">*</em></label>
+			       <select class="form-control" required="required" ng-model="order.machine.id" id="people" name="people">	 
+			            <option value>Selecione</option>       	           		            
+				        <option value="{{machine.id}}" ng-repeat="machine in machines">{{machine.description}}</option>
+			       </select>
+	    </div>
+    </div>
+     <!-- 
      <div class="col-sm-4 col-md-4">
         <div class="form-group"  ng-class="{ 'has-error': dados.time_attendance.$invalid && dados.time_attendance.$dirty }">
-           <label for="horaAtendimento" class="required">Hora Atendimento<em class="asterisco">*</em></label>
-           <input type="time" class="form-control" ng-model="attendance.time_attendance" name="time_attendance" id="timeAttendance" placeholder="Hora Atendimento">
+           <label for="horaAtendimento" class="required">Hora Pedido<em class="asterisco">*</em></label>
+           <input type="time" class="form-control" ng-model="order.timeOrder" name="time_attendance" id="timeAttendance" placeholder="Hora Atendimento">
+        </div> 
+     </div> -->
+      <div class="col-sm-4 col-md-3">
+        <div class="form-group"  ng-class="{ 'has-error': dados.numberHoursWorked.$invalid && dados.numberHoursWorked.$dirty }">
+           <label for="horaAtendimento" class="required">Numero Horas<em class="asterisco">*</em></label>
+           <input type="text" class="form-control" ng-model="order.numberHoursWorked" name="numberHoursWorked" id="numberHoursWorked" placeholder="Informe o numero de horas a serem trabalhadas">
         </div>
      </div>
-     <div class="col-sm-4 col-md-4">
-        <div class="form-group"
-	        ng-class="{ 'has-error': dados.nameEmployee.$invalid && dados.nameEmployee.$dirty }">
-			   <label for="employee">Funcionario<em class="asterisco">*</em></label>
-			     <select required multiple="multiple" class="form-control" ng-model="attendance.nameEmployee" id="employee" name="nameEmployee">
-				     <option value="Thales">Thales</option>
-					 <option value="Beatriz">Beatriz</option>
-					 <option value="Denis">Denis</option>
-					 <option value="Nei">Nei</option>
-					 <option value="Darcy">Darcy</option>					
-			     </select>
-	        </div>
-       </div>
    </div> 
    <div class="row">
-     <div class="col-sm-4 col-md-4">
+     <div class="col-sm-4 col-md-6">
           <div class="form-group"
 			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
-			    <label for="status">Nome Pessoa<em class="asterisco">*</em></label>
-			       <select class="form-control" ng-disabled="attendance.producer" ng-model="attendance.people.id" id="people" name="people">	 
+			    <label for="status">Nome Pessoa Comum<em class="asterisco">*</em></label>
+			       <select class="form-control" ng-disabled="order.producer" ng-model="order.people.id" id="people" name="people">	 
 			            <option value>Selecione</option>       	           		            
 				        <option value="{{people.id}}" data-ng-repeat="people in peoplesFromAgriculture">{{people.name}}</option>
 			       </select>
 	      </div>
      </div>
-       <div class="col-sm-4 col-md-4">
+       <div class="col-sm-4 col-md-6">
            <div class="form-group"
 			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
 			    <label for="status">Nome Produtor<em class="asterisco">*</em></label>
-			        <select class="form-control" ng-disabled="attendance.people" ng-model="attendance.producer.id" id="producer" name="producer">
+			        <select class="form-control" ng-disabled="order.people" ng-model="order.producer.id" id="producer" name="producer">
 			            <option value>Selecione</option>
 				        <option value="{{producer.id}}" ng-repeat="producer in producers">{{producer.name}}</option>
 			       </select>   
 	        </div>
       </div>
+  </div>
+   <div class="row">
+     <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
+          <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
+          <textarea type="text" required="required" ng-model="order.details" name="details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
+        </div>
+    </div>
+     <div class="col-sm-4 col-md-4">
+           <div class="form-group"
+	        ng-class="{ 'has-error': dados.types.$invalid && dados.types.$dirty }">
+			   <label for="employee">Tipo Serviço<em class="asterisco">*</em></label>
+			     <select multiple="multiple" required="required" class="form-control" ng-model="order.typeService" id="types" name="types">
+				     <option value="Roma">Roma</option>
+				     <option value="Subsolar">Subsolar</option>		
+				     <option value="Subsolar">Riscar</option>	
+				     <option value="Carreta">Carreta</option>			
+				     <option value="Tombação">Tombação</option>
+				     <option value="Devolução">Devolução</option>		   				 
+			     </select>
+	        </div>
+     </div>
        <div class="col-sm-4 col-md-4"> 
              <div class="form-group"
 			  ng-class="{ 'has-error': dados.status.$invalid && dados.status.$dirty }">
-			    <label for="status">Status Atendimento<em class="asterisco">*</em></label>
-			       <select required multiple="multiple" class="form-control" ng-model="attendance.status" id="status" name="status">
-			      
-				        <option value="Andamento">Em andamento</option>						
+			    <label for="status">Status Pedido<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="order.status" id="status" name="status">
+				        <option value="Pendente">Pendente</option>		
+				        <option value="Liberado">Liberado</option>		
+				        <option value="OK">OK</option>				
 			       </select>
 	        </div>      
       </div>
   </div> 
   <br/>
-  <div class="row">
-   <div class="col-md-4">
-         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
-           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
-           <br/> 
-           <br/>
-           <label class="rario-inline">Agricultura</label>
-           <input required="required" type="radio" name="sector" ng-model="attendance.sector" value="AGRICULTURA">         
-        </div>
-   </div>
-    <div class="col-md-4">
-         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
-           <label for="sexo" class="required">Prazo Realização<em class="asterisco">*</em></label>
-           <br/>
-           <br/> 
-           <label class="rario-inline">1 dias</label>
-           <input type="radio" name="deadline" ng-model="attendance.deadline" value="UmDia"><br/> 
-           <label>2 dias</label>
-           <input  type="radio" name="deadline" ng-model="attendance.deadline" value="DoisDias"><br/>     
-           <label>4 dias</label>
-           <input  type="radio" name="deadline" ng-model="attendance.deadline" value="QuatroDias"><br/>  
-           <label>6 dias</label>
-           <input  type="radio" name="deadline" ng-model="attendance.deadline" value="SeisDias">                       
-        </div>
-   </div>
-  </div>   
-
   
-  <button type="submit" ng-disabled="!attendance.typeService" class="btn btn-primary">Salvar</button>
+  <button type="submit" ng-disabled="!order.typeService" class="btn btn-primary">Salvar</button>
   <button type="submit" class="btn btn-warning">Cancelar</button>
+  <button type="submit" class="btn btn-success" ui-sref="registered-orders">Pedidos</button>
        
   </form>
   <hr class="featurette-divider"/>

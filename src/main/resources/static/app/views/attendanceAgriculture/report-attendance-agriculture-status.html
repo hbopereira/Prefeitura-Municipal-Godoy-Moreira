@@ -1,0 +1,104 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+    <h3 class="well lead" align="center">Atendimentos Status Conclusão</h3>
+    <br/>
+ <form class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+           <input type="text" ng-model="pesquisar" class="form-control" placeholder="Pesquisar...">
+       </div>
+           <button type="submit" class="btn btn-primary">Pesquisar</button>
+ </form> 
+ <br/>
+ <br/>
+ <br/>
+ <hr class="featurette-divider"/>
+ <div id="prodFamilyAgriculture">    
+ <div class="container-fluid">
+   <div class="row"> 
+     <div class="col-sm-4">
+        <div>
+           <p><h4>Atendimentos(Andamento)</h4> total: {{totActive}}  registros </p>
+        </div>
+     </div>
+     <div class="col-sm-5">
+        <div>
+           <p><h4>Atendimentos(Não Concluido)</h4> total: {{totNot}}  registros </p>
+        </div>
+     </div>
+      <div class="col-sm-3">
+        <div>
+           <p><h4>Atendimentos(Finalizado)</h4> total: {{totFinally}}  registros </p>
+        </div>
+     </div>    
+   </div>
+  </div>
+   <br/>
+   <br/>
+    <table align="center" class="table table-striped" id="prodFamily">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Numero Pedido</th>
+            <th>Data Atendimento</th>
+            <th>Hora Atendimento</th>
+            <th>Status</th>
+            <th>Prazo Realização</th>
+            <th>Funcionario</th>
+            <th>Data Término</th>
+          </tr>
+        </thead> 
+          <tr ng-repeat="attendance in attendanciesFiltered = ( attendanciesAll | filter: pesquisar )" >
+             <td>{{attendance.order.numberOrder}}</td>
+             <td>{{attendance.day_attendance | date: 'dd/MM/yyyy'}}</td>
+             <td>{{attendance.time_attendance | date: 'HH:mm'}}</td>
+             <td>
+               <span ng-repeat="sta in attendance.status">{{sta}}</span>
+			 </td>
+			 <td>
+               <span ng-repeat="dl in attendance.deadLine">{{dl}}</span>
+			 </td>
+			 <td>
+               <span ng-repeat="emp in attendance.nameEmployee">{{emp}}</span>
+			 </td> 
+			 <td>{{attendance.dateFinally | date: 'dd/MM/yyyy'}}</td>     
+          </tr>
+     </table> 
+     <br/>
+     <br/>
+   
+   <div align="left">
+        <div>
+           <p><h4>Total</h4> {{attendanciesFiltered.length}} registros ao todo</p>
+        </div>
+   </div>
+</div>   
+   <div style="font-weight: bold;" align="center">
+	   <a href="javascript:HTMLtoPDF()">Gerar PDF</a>
+	   <br/>
+	   <br/>
+	   <button id="btnExport" class="btn btn-primary btn-sm">Gerar Excel</button>
+   </div>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <footer align="center">
+      <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+   </footer>
+   
+   <script>
+    $(document).ready(function () {
+        $("#btnExport").click(function () {
+            $("#prodFamily").btechco_excelexport({
+                containerid: "prodFamily"
+               , datatype: $datatype.Table
+               , filename: 'sample'
+            });
+        });
+    });
+</script>
+
+</body>

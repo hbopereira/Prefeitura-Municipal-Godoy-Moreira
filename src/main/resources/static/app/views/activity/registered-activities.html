@@ -39,7 +39,7 @@
           </tr>
         </thead> 
          <tbody>
-          <tr ng-repeat="activity in activities | filter: pesquisaAtividade | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
+          <tr ng-repeat="activity in activitiesFiltered = ( activities | filter: pesquisaAtividade) | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
              <td>{{activity.description}}</td>
              <td>{{activity.details}}</td>
              <td>{{activity.typePrague}}</td>
@@ -93,17 +93,17 @@
         </div>
      </div>
        <div class="col-md-6">
-        <div class="form-group">
-           <label for="NomeEsposa" class="required">Detalhes<em class="asterisco">*</em></label>
-           <textarea type="text" required="required" ng-model="clickedActivity.details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
+         <div class="form-group"  ng-class="{ 'has-error': dados.description.$invalid && dados.description.$dirty }">
+           <label for="Descricao" class="required">Tipo de Praga<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="clickedActivity.typePrague" name="description" class="form-control" id="description" placeholder="Informe a Descrição">
         </div>
      </div>
   </div>
    <div class="row">
      <div class="col-md-6">
-        <div class="form-group"  ng-class="{ 'has-error': dados.description.$invalid && dados.description.$dirty }">
-           <label for="Descricao" class="required">Tipo de Praga<em class="asterisco">*</em></label>
-           <input type="text" required="required" ng-model="clickedActivity.typePrague" name="description" class="form-control" id="description" placeholder="Informe a Descrição">
+        <div class="form-group">
+           <label for="NomeEsposa" class="required">Detalhes<em class="asterisco">*</em></label>
+           <textarea type="text" required="required" ng-model="clickedActivity.details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
         </div>
      </div>
         <div class="col-md-6">
@@ -130,7 +130,7 @@
      
      <div align="left">
         <div>
-           <p><h4>Total</h4> {{tot}} registros ao todo</p>
+           <p><h4>Total</h4> {{activitiesFiltered.length}} registros ao todo</p>
         </div>
      </div>
      

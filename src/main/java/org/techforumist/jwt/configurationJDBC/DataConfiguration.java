@@ -7,10 +7,10 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class DataConfiguration {
 	
-	@Bean
+	/*@Bean
     public BasicDataSource dataSource() throws URISyntaxException {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
@@ -24,6 +24,6 @@ public class DataConfiguration {
         basicDataSource.setPassword(password);
 
         return basicDataSource;
-    }
+    }*/
 
 }

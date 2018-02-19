@@ -2,12 +2,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!--  
 <div align="center">
 	   <img src="app/imagens/prefeitura-godoy-moreira.jpg" alt="Generic placeholder image" width="100" height="100"/>
 </div>
 <br/>
  
 <body>
+ <div class="login-page">
   <div class=" col-md-4 col-md-offset-4">
 	<div class="panel panel-default" style="background-color: #eee;">
 		<div align="center"  class="alert alert-warning" style="background-color: #feffct1;">
@@ -47,8 +49,56 @@
 	 <footer align="center">
         <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal de Godoy Moreira &middot;</p>
     </footer> 
-  </div>
+    <br/>
+    <br/>
+  </div>   
+   <div id="rodape_software">
+     <h3 align="center">Fale Conosco</h3>
+     <h4 align="center">Contato: (43)3463-8000</h4>
+   </div>
+ </div>
 </body>
+--><body>
+    <div class=login-page>
+
+   <div class=row>
+      <div class="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+         <h1><small>Prefeitura Municipal</small></h1>
+         <form name="dados" role=form ng-submit="login()">
+            <div class=form-content>
+               <div class="form-group has-feedback"  ng-class="{ 'has-error': dados.username.$invalid && dados.username.$dirty }">
+                 <label for="username">Usuário:</label> 
+                 <input type="text"  required="required" ng-model="username" class="form-control validate input-underline input-lg" placeholder="Nome de Usuario">
+                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
+               </div>
+               <div class="form-group has-feedback"  ng-class="{ 'has-error': dados.password.$invalid && dados.username.$dirty }">
+                 <label for="username">Senha:</label> 
+                 <input type="password" required="required" ng-model="password" class="form-control validate input-underline input-lg" placeholder="Senha">
+                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+               </div>
+           </div>
+            <button type="submit" class="btn btn-primary btn-outline btn-lg btn-rounded">Acessar</button> 
+         </form>
+      </div>
+   </div>
+   	<br/>
+	<br/>
+	<br/>
+	<hr class="featurette-divider"/>
+	 <footer align="center">
+        <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal de Godoy Moreira &middot;</p>
+    </footer>
+</div>
+</body>
+
 
 
      

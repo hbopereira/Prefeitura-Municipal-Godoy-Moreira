@@ -16,7 +16,7 @@ angular.module('JWTDemoApp')
 			$scope.dados.$setPristine();
 		    alert("Produtor Registrado com Sucesso !");
 		}).error(function(error) {
-			alert("Erro ao Salvar Produtor !")
+			alert("Registro já Existente, por favor tente novamente !");
 		});
 	};
 	
@@ -63,17 +63,6 @@ angular.module('JWTDemoApp')
 			$scope.message='';
 			$scope.activity = null;
 				
-		}).error(function(error) {
-			$scope.message = error.message;
-		});
-	};
-	
-	var getTotProducers = function(){
-		$http.get('Producer/tot').success(function(res) {
-			$scope.tot = res;
-			console.log($scope.tot);
-			//$scope.dados.$setPristine();
-			$scope.message='';		
 		}).error(function(error) {
 			$scope.message = error.message;
 		});
@@ -234,7 +223,6 @@ angular.module('JWTDemoApp')
 	
 	getProducers();
 	getAllActivities();
-	getTotProducers();
 	getProducersWithAgriFamily();
 	getProducersNotAgriFamily();
 	getTotProducersWithAgriFamily();

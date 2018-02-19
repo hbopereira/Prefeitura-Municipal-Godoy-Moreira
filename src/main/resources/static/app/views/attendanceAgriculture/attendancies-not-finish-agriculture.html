@@ -1,0 +1,100 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ <div class="container">
+   <div class="form-group">
+        <h3 class="well lead" align="center">Atendimentos Não Concluidos</h3>
+         <div class="text-right">
+            <button type="button" class="btn btn-success btn-sm" ui-sref="new-attendance-agriculture">
+		      <span class="glyphicon glyphicon-plus"></span> Registrar Atendimento
+	        </button>
+         </div>
+	     <br/>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                   <input type="text" ng-model="pesquisaAtendimento" class="form-control" placeholder="Pesquisar..">
+                </div>
+                  <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </form> 
+      <br/>
+   </div>
+ </div> 
+ <hr class="featurette-divider"/>
+ <br/>
+    <div class="container">
+      <table class="table table-striped" id="idTable">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Numero Pedido</th>
+            <th>Data Atendimento</th>
+            <th>Hora Atendimento</th>
+            <th>Funcionario</th>
+            <th>Status</th>
+            <th>Data Prevista</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead> 
+          <tr ng-repeat="attendance in attendanciesNot | filter: pesquisaAtendimento | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
+             <td>{{attendance.order.numberOrder}}</td>
+             <td>{{attendance.day_attendance | date: 'dd/MM/yyyy'}}</td>
+             <td>{{attendance.time_attendance}}</td>           
+			 <td>
+               <span ng-repeat="emp in attendance.nameEmployee">{{emp}}</span>
+			 </td>  
+			 <td>
+               <span ng-repeat="sta in attendance.status">{{sta}}</span>
+			 </td>
+			 <td>{{attendance.plannedDay | date: 'dd/MM/yyyy'}}</td>    
+             <td>
+              <button title="Detalhes" type="button" class="btn btn-warning btn-sm"
+                 data-toggle="modal" data-target="#confirmar" ng-click="selectAttendance(attendance)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td>  
+          </tr>
+     </table> 
+     <hr class="featurette-divider"/>            
+       
+   <!-- modal of details of attendance -->  
+<div class="modal fade" id="confirmar" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+              <p class="well lead" align="center">Detalhes Atendimento</p>
+ <form name="dados" class="alert alert-warning" role="alert"> 
+     <div>
+         <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
+           <label for="Detalhes" class="required">Motivo Cancelamento<em class="asterisco">*</em></label>
+           <textarea type="text" required="required" ng-disabled="!attendance.ageMachine" ng-model="clickedAttendance.cancelattionReason" name="details" id="Details" 
+           class="form-control margim-bottom" rows="4" placeholder="Informe aqui os detalhes, a região, e a duração do tempo em que o maquinario estara em tal propriedade"></textarea>
+        </div>
+    </div>     
+  <button type="submit" data-dismiss="modal" class="btn btn-primary">Sair</button>
+       
+ </form>
+     </div>
+   </div>
+  </div>
+</div>
+     <div align="left">
+        <div>
+           <p><h4>Total</h4> {{totNot}} registros ao todo</p>
+        </div>
+     </div>
+     
+     <div align="center">
+        <pagination total-items="attendanciesNot.length" class="pagination-sm" ng-model="currentPage" items-per-page="pageSize"></pagination> 
+     </div>
+     <br/>
+	 <br/>
+	 <br/>
+     <footer align="center">
+        <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+    </footer>
+    
+    <script>
+    $('#Data').val(dateFormated);
+    </script>
+    </div> 

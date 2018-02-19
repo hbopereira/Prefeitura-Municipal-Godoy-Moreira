@@ -27,18 +27,18 @@ em{
         </div>
      </div>
      <div class="col-md-6">
-        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
-          <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
-          <textarea type="text" required="required" ng-model="activity.details" name="details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
+       <div class="form-group"  ng-class="{ 'has-error': dados.typePrague.$invalid && dados.typePrague.$dirty }">
+           <label for="Descricao" class="required">Tipo de Praga<em class="asterisco">*</em></label>
+           <input type="text" required="required" ng-model="activity.typePrague" name="typePrague" class="form-control" id="description" placeholder="Informe a descrição da Praga">
         </div>
      </div>
   </div>
    <div class="row">
      <div class="col-md-6">
-        <div class="form-group"  ng-class="{ 'has-error': dados.typePrague.$invalid && dados.typePrague.$dirty }">
-           <label for="Descricao" class="required">Tipo de Praga<em class="asterisco">*</em></label>
-           <input type="text" required="required" ng-model="activity.typePrague" name="typePrague" class="form-control" id="description" placeholder="Informe a descrição da Praga">
-        </div>
+        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
+          <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
+          <textarea type="text" required="required" ng-model="activity.details" name="details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
+       </div>
      </div>
         <div class="col-md-6">
            <div class="form-group"

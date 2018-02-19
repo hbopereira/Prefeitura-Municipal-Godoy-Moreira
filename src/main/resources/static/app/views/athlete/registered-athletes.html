@@ -35,7 +35,7 @@
             <th></th>
           </tr>
         </thead> 
-          <tr ng-repeat="athlete in athletes | filter: pesquisaAtleta | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
+          <tr ng-repeat="athlete in athletesFiltered = ( athletes | filter: pesquisaAtleta) | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
              <td>{{athlete.name}}</td>
              <td>{{athlete.birthDate | date: 'dd/MM/yyyy'}}</td>  
              <td>
@@ -122,36 +122,21 @@
      </div>
   </div> 
    <div class="row">
-     <div class="col-sm-4 col-md-4">
+     <div class="col-sm-4 col-md-6">
         <div class="form-group"  ng-class="{ 'has-error': dados.cpf.$invalid && dados.cpf.$dirty }">
            <label for="CPF"class="required">CPF<em class="asterisco">*</em></label>
            <input type="text" required="required" ng-model="clickedAthlete.cpf" name="cpf" class="form-control" maxlength="11" id="cpf" placeholder="Informe o CPF">
         </div>
     </div>
-     <div class="col-sm-4 col-md-4">
+     <div class="col-sm-4 col-md-6">
          <div class="form-group"  ng-class="{ 'has-error': dados.rg.$invalid && dados.rg.$dirty }">
            <label for="RG" class="required">RG<em class="asterisco">*</em></label>
            <input type="text" required="required" ng-model="clickedAthlete.rg" name="rg" class="form-control" maxlength="9" id="rg" placeholder="Informe o RG">
          </div>
      </div>
-       <div class="col-sm-4 col-md-4">
-         <div class="form-group"
-			  ng-class="{ 'has-error': dados.regions.$invalid && dados.regions.$dirty }">
-			    <label for="region">Selecione a Região<em class="asterisco">*</em></label>
-			       <select required multiple="multiple" class="form-control" ng-model="clickedAthlete.regions" id="region" name="regions">			           
-						<option value="Agua da Anta">Agua da Anta</option>
-						<option value="Agua da Pintada">Agua da Pintada</option>
-						<option value="Agua do Cascudo">Agua do Cascudo</option>	
-						<option value="Agua do Milton">Agua do Milton</option>
-						<option value="Agua do Tentilhão">Agua do Tentilhão</option>
-						<option value="Agua do Bananeira">Agua do Bananeira</option>
-						<option value="Godoy Moreira Centro">Godoy Moreira Centro</option>
-			       </select>
-	        </div>
-        </div>
   </div> 
   <div class="row">
-       <div class="col-md-4">
+     <div class="col-md-6">
            <div class="form-group"
 			  ng-class="{ 'has-error': dados.categories.$invalid && dados.categories.$dirty }">
 			    <label for="category">Categoria<em class="asterisco">*</em></label>
@@ -165,6 +150,21 @@
 			       </select>
 	        </div>
      </div>
+      <div class="col-sm-4 col-md-6">
+         <div class="form-group"
+			  ng-class="{ 'has-error': dados.regions.$invalid && dados.regions.$dirty }">
+			    <label for="region">Selecione a Região<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="clickedAthlete.regions" id="region" name="regions">			           
+						<option value="Agua da Anta">Agua da Anta</option>
+						<option value="Agua da Pintada">Agua da Pintada</option>
+						<option value="Agua do Cascudo">Agua do Cascudo</option>	
+						<option value="Agua do Milton">Agua do Milton</option>
+						<option value="Agua do Tentilhão">Agua do Tentilhão</option>
+						<option value="Agua do Bananeira">Agua do Bananeira</option>
+						<option value="Godoy Moreira Centro">Godoy Moreira Centro</option>
+			       </select>
+	        </div>
+       </div>
   </div> 
   <button type="submit" data-dismiss="modal" class="btn btn-primary" ng-click="updateAthlete()">Editar</button>
   <button type="submit" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
@@ -181,7 +181,7 @@
 
      <div align="left">
         <div>
-           <p><h4>Total</h4> {{tot}} registros ao todo</p>
+           <p><h4>Total</h4> {{athletesFiltered.length}} registros ao todo</p>
         </div>
      </div>
      <div align="center">

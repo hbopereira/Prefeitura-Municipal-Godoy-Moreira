@@ -28,17 +28,6 @@ angular.module('JWTDemoApp')
 		});
 	};
 	
-	var getTotActivities = function(){
-		$http.get('Activity/tot').success(function(res) {
-			$scope.tot = res;
-			console.log($scope.tot);
-			//$scope.dados.$setPristine();
-			$scope.message='';		
-		}).error(function(error) {
-			$scope.message = error.message;
-		});
-	};
-	
 	$scope.updateActivity = function(){
 		$http.put('Activity', $scope.clickedActivity).success(function(res) {
 			$scope.producer = null;
@@ -65,6 +54,5 @@ angular.module('JWTDemoApp')
 	}
 	
 	getActivities();
-	getTotActivities();
 	
 });

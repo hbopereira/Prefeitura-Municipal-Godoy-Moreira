@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.techforumist.jwt.domain.People;
 import org.techforumist.jwt.repository.PeopleRepository;
+import org.techforumist.jwt.service.PeopleService;
 
 @RestController
 @RequestMapping("/People")
@@ -20,12 +21,15 @@ public class PeopleController {
 	@Autowired
 	private PeopleRepository peopleRepo;
 	
+	@Autowired
+	private PeopleService peopleService;
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<?> savePeople(@RequestBody People peo){
 	   try{	
 	       return ResponseEntity
 	    		   .status(HttpStatus.OK)
-	    		   .body(this.peopleRepo.save(peo));		   
+	    		   .body(this.peopleService.savePeople(peo));		   
 	   }catch(RuntimeException e){    
 		   return ResponseEntity
 				   .status(HttpStatus.BAD_REQUEST)
@@ -47,5 +51,6 @@ public class PeopleController {
 	public List<People> getPeoplesSport(){
 		return new ArrayList<People>(peopleRepo.getPeoplesFromSport());
 	}
+	
 
 }

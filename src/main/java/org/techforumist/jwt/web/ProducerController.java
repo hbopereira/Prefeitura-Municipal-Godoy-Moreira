@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +48,7 @@ public class ProducerController {
 	   }
 	}
 	
+	@PreAuthorize ("hasAnyRole ('ROLE_ADMIN', 'ROLE_AGRICULTURA', 'ROLE_SUBORDINADO_R_AGRICULTURA'")
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Producer> getProducers(){
 	    return new ArrayList<Producer>(prodRepo.findAll());   
@@ -81,12 +84,6 @@ public class ProducerController {
 	public List<Activity> getActivities(){
 		return new ArrayList<Activity>(actRepo.findAll());
 		
-	}
-	
-	@RequestMapping(value="/tot", method=RequestMethod.GET)
-	public Integer getTot(){
-		Integer tot = prodRepo.getRegisters();
-		return tot;
 	}
 	
 	@RequestMapping(value="/totProdFamily", method=RequestMethod.GET)
@@ -154,10 +151,6 @@ public class ProducerController {
 		Integer tot = prodRepo.countActFromProducer6();
 		return tot;
 	}
-	
-	
-	
-	
 	
 	
 }

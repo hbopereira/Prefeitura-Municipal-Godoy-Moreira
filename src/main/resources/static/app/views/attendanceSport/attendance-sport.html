@@ -304,21 +304,7 @@ em{
            class="form-control margim-bottom" rows="4"></textarea>
         </div>
      </div>
-  </div> 
-   <div class="row">
-     <div class="col-sm-4 col-md-6">
-         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
-           <label for="diaAtendimento" class="required">Dia Atendimento<em class="asterisco">*</em></label>
-           <input type="date" required="required" class="form-control" ng-model="attendance.day_attendance" name="day_attendance" id="dayAttendance" placeholder="Informe o Dia do Atendimento">
-        </div>
-     </div>
-     <div class="col-sm-4 col-md-6">
-        <div class="form-group"  ng-class="{ 'has-error': dados.time_attendance.$invalid && dados.time_attendance.$dirty }">
-           <label for="horaAtendimento" class="required">Hora Atendimento<em class="asterisco">*</em></label>
-           <input type="time" class="form-control" ng-model="attendance.time_attendance" name="time_attendance" id="timeAttendance" placeholder="Hora Atendimento">
-        </div>
-     </div>
-   </div> 
+  </div>  
    <div class="row">
      <div class="col-sm-4 col-md-4">
           <div class="form-group"
@@ -340,6 +326,32 @@ em{
 			       </select>   
 	        </div>
       </div>
+      <div class="col-sm-4 col-md-4">
+         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
+           <label for="diaAtendimento" class="required">Dia Atendimento<em class="asterisco">*</em></label>
+           <input type="date" required="required" class="form-control" ng-model="attendance.day_attendance" name="day_attendance" id="dayAttendance" placeholder="Informe o Dia do Atendimento">
+        </div>
+     </div>
+  </div> 
+  <br/>
+  <div class="row">
+     <div class="col-sm-4 col-md-4">
+         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
+           <label for="diaAtendimento" class="required">Data Horario<em class="asterisco">*</em></label>
+           <input type="date" required="required" class="form-control" ng-model="attendance.dayTime" name="dayTime" id="dayTime">
+        </div>
+     </div>
+       <div class="col-sm-4 col-md-4"> 
+             <div class="form-group"
+			  ng-class="{ 'has-error': dados.timeofDay.$invalid && dados.timeofDay.$dirty }">
+			    <label for="status">Horario Pretendido<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="attendance.timeofDay" id="td" name="td">			  
+				        <option value="19:00 as 20:00">19:00 as 20:00</option>		
+				        <option value="20:00 as 21:00">20:00 as 21:00</option>
+				        <option value="21:00 as 22:00">21:00 as 22:00</option>						
+			       </select>
+	        </div>      
+      </div>
        <div class="col-sm-4 col-md-4"> 
              <div class="form-group"
 			  ng-class="{ 'has-error': dados.status.$invalid && dados.status.$dirty }">
@@ -350,35 +362,12 @@ em{
 			       </select>
 	        </div>      
       </div>
-  </div> 
-  <br/>
-  <div class="row">
-     <div class="col-sm-4 col-md-4">
-         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
-           <label for="diaAtendimento" class="required">Data Horario<em class="asterisco">*</em></label>
-           <input type="date" required="required" class="form-control" ng-model="attendance.dayTime" name="dayTime" id="dayTime">
-        </div>
-     </div>
-     <div class="col-sm-4 col-md-4">
-        <div class="form-group"  ng-class="{ 'has-error': dados.time_attendance.$invalid && dados.time_attendance.$dirty }">
-           <label for="horaAtendimento" class="required">Horario Escolhido<em class="asterisco">*</em></label>
-           <input type="text" class="form-control" ng-model="attendance.timeOfDay" name="timeOfDay" id="timeDay">
-        </div>
-     </div>
-     <div class="col-md-4">
-         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
-           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
-           <br/> 
-           <br/>
-           <label class="rario-inline">Esporte</label>
-           <input required="required" type="radio" name="sector" ng-model="attendance.sector" value="ESPORTE">         
-        </div>
-   </div>
   </div>   
 
   
   <button type="submit" class="btn btn-primary">Salvar</button>
   <button type="submit" class="btn btn-warning">Cancelar</button>
+  <button type="submit" class="btn btn-success" ui-sref="attendancies-progress-sport">Atendimentos</button>
        
   </form>
   <hr class="featurette-divider"/>

@@ -5,6 +5,11 @@
  <div class="container">
    <div class="form-group">
         <h3 class="well lead" align="center">Atendimentos Não Concluidos</h3>
+         <div class="text-right">
+            <button type="button" class="btn btn-success btn-sm" ui-sref="new-attendance-sport">
+		      <span class="glyphicon glyphicon-plus"></span> Registrar Atendimento
+	        </button>
+         </div>
 	     <br/>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
@@ -24,26 +29,18 @@
             <th>Descrição</th>
             <th>Data Abertura</th>
             <th>Hora Abertura</th>
-            <th>Funcionario</th>
-            <th>Setor</th>
-            <th>Prazo Realização</th>
             <th>Status</th>
             <th>Motivo</th>
             <th></th>
             <th></th>
           </tr>
         </thead> 
-          <tr ng-repeat="attendance in attendanciesNot | filter: pesquisaAtendimento | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
+          <tr ng-repeat="attendance in attendanciesNotSport | filter: pesquisaAtendimento | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
              <td>
                <span ng-repeat="age in attendance.typeService">{{age}}</span>
 			 </td>
              <td>{{attendance.day_attendance | date: 'dd/MM/yyyy'}}</td>
-             <td>{{attendance.time_attendance | date: 'HH:mm'}}</td>           
-			 <td>
-               <span ng-repeat="emp in attendance.nameEmployee">{{emp}}</span>
-			 </td>
-			 <td>{{attendance.sector}}</td>
-			 <td>{{attendance.deadline}}</td>  
+             <td>{{attendance.time_attendance}}</td>           			  
 			 <td>
                <span ng-repeat="sta in attendance.status">{{sta}}</span>
 			 </td>
@@ -67,63 +64,45 @@
  <form name="dados" class="alert alert-warning" role="alert">
    <div class="row">
      <div class="col-sm-4 col-md-4">
-           <div class="form-group"
+          <div class="form-group"
 	        ng-class="{ 'has-error': dados.ageMachine.$invalid && dados.ageMachine.$dirty }">
 			   <label for="employee">Serviços Oferecidos<em class="asterisco">*</em></label>
-			     <select required multiple="multiple" class="form-control" ng-model="clickedAttendance.typeService" id="typeService" name="typeService">
-				     <option value="Agendamento de Maquinario">Agendamento de Maquinario</option>
-				      <option value="Assistência Técnica">Assistência Técnica</option>					 					 
+			     <select multiple="multiple" class="form-control" ng-model="clickedAttendance.typeService" id="ageMachine" name="ageMachine">
+				     <option value="Agendamento de Horario">Agendamento de Horario</option>     				   				 
 			     </select>
 	        </div>
      </div>
-     <div class="col-sm-4 col-md-4">
+      <div class="col-sm-4 col-md-4">
            <div class="form-group"
 	        ng-class="{ 'has-error': dados.ageMachine.$invalid && dados.ageMachine.$dirty }">
-			   <label for="employee">Descrição Maquinario<em class="asterisco">*</em></label>
-			     <select required multiple="multiple" class="form-control" ng-disabled="!clickedAttendance.descTypeService" ng-model="clickedAttendance.descTypeService" id="typeS" name="typeS">
-				     <option value="Maquinario Patrola">Maquinario Patrola</option>
-				     <option value="Maquinario Retro Escavadeira">Maquinario Retro Escavadeira</option>		
-				     <option value="Maquinario Pazinha">Maquinario Pazinha</option>		
-				     <option value="Maquinario Trator Esteira">Maquinario Trator Esteira</option>				 
+			   <label for="employee">Tipo de Campo</label>
+			     <select multiple="multiple" class="form-control" ng-model="clickedAttendance.descTypeService" id="desc" name="desc">
+				     <option value="Quadra Coberta(Cezarião)">Quadra Coberta(Cezarião)</option>
+				     <option value="Campo Society">Campo Society</option>						     
 			     </select>
 	        </div>
      </div>
      <div class="col-sm-4 col-md-4">
         <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
            <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
-           <textarea type="text" required="required" ng-disabled="!clickedAttendance.ageMachine" ng-model="clickedAttendance.details" name="details" id="Details" 
+           <textarea type="text" required="required"  ng-model="clickedAttendance.details" name="details" id="Details" 
            class="form-control margim-bottom" rows="4" placeholder="Informe aqui os detalhes, a região, e a duração do tempo em que o maquinario estara em tal propriedade"></textarea>
         </div>
      </div>
   </div> 
   <div class="row">
-     <div class="col-md-4">
+     <div class="col-md-6">
         <div class="form-group">
            <label for="DiaAtendimento" class="required">Dia Atendimento<em class="asterisco">*</em></label>
            <input type="date" required="required" ng-model="clickedAttendance.day_attendance" class="form-control" id="day_attendance">
         </div>
      </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
            <label for="NomeEsposa" class="required">Hora Atendimento<em class="asterisco">*</em></label>
            <input type="time" required="required" ng-model="clickedAttendance.time_attendance" id="time_attendance" class="form-control"></input>
         </div>
      </div>
-       <div class="col-md-4">
-        <div class="form-group"
-	        ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
-			   <label for="employee">Funcionario<em class="asterisco">*</em></label>
-			     <select required multiple="multiple" class="form-control" ng-model="clickedAttendance.nameEmployee" id="employee" name="employee">
-				     <option value="Thales">Thales</option>
-					 <option value="Beatriz">Beatriz</option>
-					 <option value="Denis">Denis</option>
-					 <option value="Nei">Nei</option>
-					 <option value="Darcy">Darcy</option>
-					 <option value="Sergio">Sergio</option>
-					 <option value="Amarildo">Amarildo</option>
-			     </select>
-	        </div>
-       </div>
   </div>
   <div class="row">
      <div class="col-md-6">
@@ -131,32 +110,30 @@
 			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
 			    <label for="status">Nome Pessoa</em></label>
 			       <select  multiple="multiple" class="form-control" 
-			       ng-disabled="clickedAttendance.producer" ng-model="clickedAttendance.people" id="people" name="people">
-				        <option ng-repeat="people in peoplesFromAgriculture">{{people.name}}</option>
+			       ng-disabled="clickedAttendance.athlete" ng-model="clickedAttendance.people" id="people" name="people">
+				        <option ng-repeat="people in peoplesFromSport">{{people.name}}</option>
 			       </select>
 	      </div>
      </div>
        <div class="col-md-6">
            <div class="form-group"
 			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
-			    <label for="status">Nome Produtor</em></label>
+			    <label for="status">Nome Atleta</em></label>
 			       <select  multiple="multiple" class="form-control"
-			       ng-disabled="clickedAttendance.people" ng-model="clickedAttendance.producer" id="producer" name="producer">
-				        <option ng-repeat="producer in producers">{{producer.name}}</option>
+			       ng-disabled="clickedAttendance.people" ng-model="clickedAttendance.athlete" id="athlete" name="athlete">
+				        <option ng-repeat="athlete in athletes">{{athlete.name}}</option>
 			       </select>
 	        </div>
       </div>
   </div>
   <div class="row">
-       <div class="col-md-4">
-         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
-           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
-           <br/> 
-           <label class="rario-inline">Agricultura</label>
-           <input required="required" type="radio" name="sector" ng-model="clickedAttendance.sector" value="AGRICULTURA">         
+       <div class="col-md-6">
+         <div class="form-group">
+           <label for="reason" class="required">Motivo Cancelamento</label>
+           <textarea type="text" required="required" ng-model="clickedAttendance.cancelattionReason" id="reason" class="form-control margim-bottom" rows="4"></textarea>
         </div>
        </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
            <div class="form-group"
 			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
 			    <label for="status">Status Atendimento<em class="asterisco">*</em></label>
@@ -167,13 +144,6 @@
 			       </select>
 	        </div>
       </div>
-        <div class="col-md-4">
-         <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
-           <label for="Detalhes" class="required">Motivo<em class="asterisco">*</em></label>
-           <textarea type="text" required="required" ng-disabled="!attendance.ageMachine" ng-model="clickedAttendance.cancelattionReason" name="details" id="Details" 
-           class="form-control margim-bottom" rows="4" placeholder="Informe aqui os detalhes, a região, e a duração do tempo em que o maquinario estara em tal propriedade"></textarea>
-        </div>
-       </div>
   </div>     
   <button type="submit" data-dismiss="modal" class="btn btn-primary">Sair</button>
        
@@ -184,12 +154,12 @@
 </div>
      <div align="left">
         <div>
-           <p><h4>Total</h4> {{totNot}} registros ao todo</p>
+           <p><h4>Total</h4> {{totNotSport}} registros ao todo</p>
         </div>
      </div>
      
      <div align="center">
-        <pagination total-items="attendanciesNot.length" class="pagination-sm" ng-model="currentPage" items-per-page="pageSize"></pagination> 
+        <pagination total-items="attendanciesNotSport.length" class="pagination-sm" ng-model="currentPage" items-per-page="pageSize"></pagination> 
      </div>
      <br/>
 	 <br/>

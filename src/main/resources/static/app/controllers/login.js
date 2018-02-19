@@ -32,7 +32,7 @@ angular.module('JWTDemoApp')
 		}).error(function(error) {
 			// if authentication was not successful. Setting the error message.
 			//$scope.message = 'Nome ou Senha Inválidos !';
-			$scope.dados.$setPristine();
+			//$scope.dados.$setPristine();
 			alert('Dados inválidos, por favor tente novamente !');
 		
 		});

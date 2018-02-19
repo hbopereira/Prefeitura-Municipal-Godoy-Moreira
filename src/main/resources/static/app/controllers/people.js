@@ -11,7 +11,7 @@ angular.module('JWTDemoApp')
 			$scope.dados.$setPristine();
 		    alert("Pessoa Registrada com Sucesso !");
 		}).error(function(error) {
-			$scope.message = error.message;
+			alert("Registro já Existente, por favor tente novamente !");
 		});
 	};
 	

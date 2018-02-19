@@ -23,6 +23,18 @@ angular.module('JWTDemoApp')
 				controller : 'LoginController'
 			}
 		}
+	}).state('new-machine', {
+		parent : 'nav',
+		url : '/novo-maquinario',
+		data : {
+		    roles: ['ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/machine/machine.html',
+				controller : 'MachineController'
+			}
+		}
 	}).state('new-athlete', {
 		parent : 'nav',
 		url : '/novo-atleta',
@@ -67,14 +79,40 @@ angular.module('JWTDemoApp')
 		parent : 'nav',
 		url : '/produtores-cadastrados',
 		data : {
+			roles: ['ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/producer/registered-producers.html',
+				controller : 'ProducerController'
+			}
+		}
+	}).state('new-order', {
+		parent : 'nav',
+		url : '/novo-pedido',
+		data : {
 			permissions :{
 				  only:	[ 'ADMIN' , 'AGRICULTURA']	
 		    } 
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/producer/registered-producers.html',
-				controller : 'ProducerController'
+				templateUrl : 'app/views/order/order.html',
+				controller : 'OrderController'
+			}
+		}
+	}).state('registered-orders', {
+		parent : 'nav',
+		url : '/pedidos-cadastrados',
+		data : {
+			permissions :{
+				  only:	[ 'ADMIN' , 'AGRICULTURA']	
+		    } 
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/order/registered-orders.html',
+				controller : 'OrderController'
 			}
 		}
 	}).state('registered-activities', {
@@ -115,9 +153,9 @@ angular.module('JWTDemoApp')
 	}).state('registered-users', {
 		parent : 'nav',
 		url : '/usuarios-cadastrados',
-		data : {
-			role : 'ADMIN' 
-		},
+	    data : {
+		   role: 'ADMIN'
+	    },
 		views : {
 			'content@' : {
 				templateUrl : 'app/views/user/registered-users.html',
@@ -170,13 +208,13 @@ angular.module('JWTDemoApp')
 		url : '/novo-atendimento-agricultura',
 		data : {
 			permissions :{
-				  only:	['ADMIN','AGRICULTURA','ESPORTE']	
+				  only:	['ADMIN','AGRICULTURA']	
 		    } 
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendance-agriculture.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceAgriculture/attendance-agriculture.html',
+				controller : 'AttendanceAgricultureController'
 			}
 		}
 	}).state('new-attendance-sport', {
@@ -184,13 +222,13 @@ angular.module('JWTDemoApp')
 		url : '/novo-atendimento-esporte',
 		data : {
 			permissions :{
-				  only:	['ADMIN','AGRICULTURA','ESPORTE']	
+				  only:	['ADMIN', 'ESPORTE']	
 		    } 
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendance-sport.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceSport/attendance-sport.html',
+				controller : 'AttendanceSportController'
 			}
 		}
 	}).state('attendancies-progress-agriculture', {
@@ -201,8 +239,44 @@ angular.module('JWTDemoApp')
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendancies-progress-agriculture.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceAgriculture/attendancies-progress-agriculture.html',
+				controller : 'AttendanceAgricultureController'
+			}
+		}
+	}).state('report-order-status', {
+		parent : 'nav',
+		url : '/pedidos-status',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/order/report-order-status.html',
+				controller : 'OrderController'
+			}
+		}
+	}).state('report-athlete-category', {
+		parent : 'nav',
+		url : '/atletas-categoria',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/athlete/report-athlete-category.html',
+				controller : 'AthleteController'
+			}
+		}
+	}).state('report-athlete-date-born', {
+		parent : 'nav',
+		url : '/atletas-data-nascimento',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/athlete/report-athlete-date-born.html',
+				controller : 'AthleteController'
 			}
 		}
 	}).state('report-producer-with-family-agriculture', {
@@ -249,11 +323,23 @@ angular.module('JWTDemoApp')
 	},
 	views : {
 		'content@' : {
-			templateUrl : 'app/views/attendance/report-attendance-date-period.html',
+			templateUrl : 'app/views/attendanceAgriculture/report-attendance-date-period.html',
 			controller : 'AttendanceController'
 		}
 	}
-  }).state('attendancies-finally-agriculture', {
+  }).state('report-attendance-agriculture-status', {
+		parent : 'nav',
+		url : '/atendimento-status-conclusao-agricultura',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/attendanceAgriculture/report-attendance-agriculture-status.html',
+				controller : 'AttendanceAgricultureController'
+			}
+		}
+	  }).state('attendancies-finally-agriculture', {
 		parent : 'nav',
 		url : '/atendimentos-finalizados-agricultura',
 		data : {
@@ -261,8 +347,8 @@ angular.module('JWTDemoApp')
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendancies-finally-agriculture.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceAgriculture/attendancies-finally-agriculture.html',
+				controller : 'AttendanceAgricultureController'
 			}
 		}
   }).state('attendancies-not-finish-agriculture', {
@@ -273,35 +359,59 @@ angular.module('JWTDemoApp')
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendancies-not-finish-agriculture.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceAgriculture/attendancies-not-finish-agriculture.html',
+				controller : 'AttendanceAgricultureController'
 			}
 		}
   }).state('historic-attendancies-agriculture', {
 		parent : 'nav',
 		url : '/historico-atendimentos-agricultura',
 		data : {
-		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		    role: 'ADMIN'
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/historic-attendancies-agriculture.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceAgriculture/historic-attendancies-agriculture.html',
+				controller : 'AttendanceAgricultureController'
+			}
+		}
+  }).state('historic-registered-orders', {
+		parent : 'nav',
+		url : '/historico-pedidos-registrados',
+		data : {
+		    role: 'ADMIN'
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/order/historic-registered-orders.html',
+				controller : 'OrderController'
 			}
 		}
   }).state('historic-attendancies-sport', {
 		parent : 'nav',
 		url : '/historico-atendimentos-esporte',
 		data : {
+		    role: 'ADMIN'
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/attendanceSport/historic-attendancies-sport.html',
+				controller : 'AttendanceSportController'
+			}
+		}
+  }).state('report-attendance-sport-status', {
+		parent : 'nav',
+		url : '/atendimento-status-conclusao-esporte',
+		data : {
 		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/historic-attendancies-sport.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceSport/report-attendance-sport-status.html',
+				controller : 'AttendanceSportController'
 			}
 		}
-  }).state('register-people-agriculture', {
+	  }).state('register-people-agriculture', {
 		parent : 'nav',
 		url : '/registrar-pessoa-agricultura',
 		data : {
@@ -357,8 +467,8 @@ angular.module('JWTDemoApp')
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendancies-progress-sport.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceSport/attendancies-progress-sport.html',
+				controller : 'AttendanceSportController'
 			}
 		}
   }).state('attendancies-not-finish-sport', {
@@ -369,8 +479,8 @@ angular.module('JWTDemoApp')
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendancies-not-finish-sport.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceSport/attendancies-not-finish-sport.html',
+				controller : 'AttendanceSportController'
 			}
 		}
   }).state('attendancies-finally-sport', {
@@ -381,8 +491,8 @@ angular.module('JWTDemoApp')
 		},
 		views : {
 			'content@' : {
-				templateUrl : 'app/views/attendance/attendancies-finally-sport.html',
-				controller : 'AttendanceController'
+				templateUrl : 'app/views/attendanceSport/attendancies-finally-sport.html',
+				controller : 'AttendanceSportController'
 			}
 		}
 	  })

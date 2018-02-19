@@ -47,7 +47,7 @@
          <th>Status DAP</th>
       </tr>
      </thead> 
-       <tr ng-repeat="producer in producersFamily | filter: pesquisaProdutor">
+       <tr ng-repeat="producer in producersFiltered = ( producersFamily | filter: pesquisaProdutor)">
           <td>{{producer.name}}</td>
           <td>{{producer.birth_date | date: 'dd/MM/yyyy'}}</td>
           <td>{{producer.cpf}}</td>
@@ -64,7 +64,7 @@
    
    <div align="left">
         <div>
-           <p><h4>Total</h4> {{totProdFamily}} registros ao todo</p>
+           <p><h4>Total</h4> {{producersFiltered.length}} registros ao todo</p>
         </div>
    </div>
 </div>   

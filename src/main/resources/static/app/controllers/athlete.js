@@ -59,13 +59,85 @@ angular.module('JWTDemoApp')
 		});
 	}
 	
+	var getCatFromAthlete1 = function(){
+		$http.get('Athlete/totAthCat1').success(function(res) {
+			$scope.totAthCat1 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getCatFromAthlete2 = function(){
+		$http.get('Athlete/totAthCat2').success(function(res) {
+			$scope.totAthCat2 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getCatFromAthlete3 = function(){
+		$http.get('Athlete/totAthCat3').success(function(res) {
+			$scope.totAthCat3 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getCatFromAthlete4 = function(){
+		$http.get('Athlete/totAthCat4').success(function(res) {
+			$scope.totAthCat4 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getCatFromAthlete5 = function(){
+		$http.get('Athlete/totAthCat5').success(function(res) {
+			$scope.totAthCat5 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	var getCatFromAthlete6 = function(){
+		$http.get('Athlete/totAthCat6').success(function(res) {
+			$scope.totAthCat6 = res;
+			console.log($scope.tot);
+			//$scope.dados.$setPristine();
+			$scope.message='';		
+		}).error(function(error) {
+			$scope.message = error.message;
+		});
+	};
+	
+	
 	$scope.selectAthlete = function(athlete){
 		$scope.clickedAthlete = athlete;
 	}
 	
-	$scope.selectAthlete
 	
 	getAthletes();
 	getTotAthletes();
+	getCatFromAthlete1();
+	getCatFromAthlete2();
+	getCatFromAthlete3();
+	getCatFromAthlete4();
+	getCatFromAthlete5();
+	getCatFromAthlete6();
 	
 });

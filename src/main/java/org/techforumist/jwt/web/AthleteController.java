@@ -1,6 +1,5 @@
 package org.techforumist.jwt.web;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.techforumist.jwt.domain.Activity;
 import org.techforumist.jwt.domain.Athlete;
-import org.techforumist.jwt.domain.Attendance;
-import org.techforumist.jwt.domain.Producer;
 import org.techforumist.jwt.repository.AthleteRepository;
 
 @RequestMapping("/Athlete")
@@ -64,4 +60,42 @@ public class AthleteController {
 		Integer tot = athRepo.getRegisters();
 		return tot;
 	}
+	
+	@RequestMapping(value="/totAthCat1", method=RequestMethod.GET)
+	public Integer getAthCat1(){
+		Integer tot = athRepo.countCatFromAthlete1();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totAthCat2", method=RequestMethod.GET)
+	public Integer getAthCat2(){
+		Integer tot = athRepo.countCatFromAthlete2();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totAthCat3", method=RequestMethod.GET)
+	public Integer getAthCat3(){
+		Integer tot = athRepo.countCatFromAthlete3();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totAthCat4", method=RequestMethod.GET)
+	public Integer getAthCat4(){
+		Integer tot = athRepo.countCatFromAthlete4();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totAthCat5", method=RequestMethod.GET)
+	public Integer getAthCat5(){
+		Integer tot = athRepo.countCatFromAthlete5();
+		return tot;
+	}
+	
+	@RequestMapping(value="/totAthCat6", method=RequestMethod.GET)
+	public Integer getAthCat6(){
+		Integer tot = athRepo.countCatFromAthlete6();
+		return tot;
+	}
+	
+	
 }

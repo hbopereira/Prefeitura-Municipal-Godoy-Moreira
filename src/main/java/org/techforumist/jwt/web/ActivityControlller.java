@@ -57,10 +57,4 @@ public class ActivityControlller {
 		}
 		return actRepo.save(act);
 	}
-	
-	@RequestMapping(value="/tot", method=RequestMethod.GET)
-	public Integer getTot(){
-		Integer tot = actRepo.getRegisters();
-		return tot;
-	}
 }

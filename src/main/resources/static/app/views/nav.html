@@ -17,7 +17,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
   
-<nav class="navbar navbar-default" style="background-color: #e3f2fd;">
+<nav ng-show="user.username" class="navbar navbar-default" style="background-color: #e3f2fd;">
 	<div>
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -53,20 +53,38 @@
                          
                          <li class="dropdown-header" style="font-weight: bold;">PESSOAS DIVERSAS</li>                      
                          <li><a ui-sref="registered-peoples-agriculture" style="font-weight: bold;">Pessoas Registradas</a></li>
+                         
+                         <li role="separator" class="divider"></li>
+                         
+                         <li class="dropdown-header" style="font-weight: bold;">PEDIDO</li>                      
+                         <li><a ui-sref="new-order" style="font-weight: bold;">Registrar Pedido</a></li>
+                         <li><a ui-sref="registered-orders" style="font-weight: bold;">Pedidos Registrados</a></li>       
+                         
+                         <li role="separator" class="divider"></li>
+                         
+                         <li class="dropdown-header" style="font-weight: bold;">MAQUINARIO</li>                      
+                         <li><a ui-sref="new-machine" style="font-weight: bold;">Registrar Maquinario</a></li>                                                                    
                     
                          <li role="separator" class="divider"></li>
-
-                         <li class="dropdown-header" style="font-weight: bold;">RELATÓRIOS</li>
-                         <li><a ui-sref="report-producer-act-region" style="font-weight: bold;">Produtores P/ Atividade e Região</a></li>
-                         <li><a ui-sref="report-producer-with-family-agriculture" style="font-weight: bold;">Produtores P/ Agricultura Familiar</a></li>
-                         <li><a ui-sref="report-producer-not-family-agriculture" style="font-weight: bold;">Produtores N/ Agricultura Familiar</a></li>
-                         <li><a ui-sref="report-attendance-date-period" style="font-weight: bold;">Atendimentos P/ Periodo de Data</a></li>
-                    
-                         <li role="separator" class="divider"></li>
-
+                         
+                         
                          <li class="dropdown-header" style="font-weight: bold;">ATENDIMENTO</li>
-                         <li><a ui-sref="new-attendance-agriculture" style="font-weight: bold;">Registrar Atendimento</a></li>  
-                         <li><a ui-sref="historic-attendancies-agriculture" style="font-weight: bold;">Historico Atendimentos P/ Pessoa</a></li>                         
+                         <li class="dropdown-submenu">
+                             <a style="font-weight: bold;" tabindex="-1" href="#">Registrar Atendimento</a>
+                                <ul class="dropdown-menu">
+                                  <li class="dropdown-header" style="font-weight: bold;">MAQUINARIOS</li>
+                                  <li><a ui-sref="new-attendance-agriculture" style="font-weight: bold;">Agendar Maquinario</a></li> 
+                                  
+                                  <li role="separator" class="divider"></li>
+                                  
+                                  <li class="dropdown-header" style="font-weight: bold;">ASSISTENCIA TÉCNICA</li>
+                                  <li><a style="font-weight: bold;">Agendar Assistencia Tecnica</a></li> 
+                                  
+                                </ul>
+                         </li>
+                         <!-- <li><a ui-sref="new-attendance-agriculture" style="font-weight: bold;">Registrar Atendimento</a></li>  -->
+                         <li><a ui-sref="historic-attendancies-agriculture" style="font-weight: bold;">Historico Atendimentos P/ Pessoa</a></li>  
+                         <li><a ui-sref="historic-registered-orders" style="font-weight: bold;">Historico Pedidos P/ Pessoa</a></li>                       
                     </ul>
               </li>
               
@@ -81,13 +99,7 @@
                          <li role="separator" class="divider"></li>       
                          
                          <li class="dropdown-header" style="font-weight: bold;">PESSOAS DIVERSAS</li>                      
-                         <li><a ui-sref="registered-peoples-sport"  style="font-weight: bold;">Pessoas Registradas</a></li>
-                    
-                         <li role="separator" class="divider"></li>
-                    
-                         <li class="dropdown-header" style="font-weight: bold;">RELATÓRIOS</li>
-                         <li><a style="font-weight: bold;">Atletas por P/ Data Nascimento</a></li>
-                         <li><a style="font-weight: bold;">Atletas por Categoria</a></li>
+                         <li><a ui-sref="registered-peoples-sport"  style="font-weight: bold;">Pessoas Registradas</a></li>                        
                          
                           <li role="separator" class="divider"></li>
 
@@ -98,31 +110,55 @@
               </li>
             </ul>           
         </li>
-               
+        
+        <!-- 
         <li class="dropdown" ng-show="user.username">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Agenda <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Recepção <span class="caret"></span></a>
                <ul class="dropdown-menu">
-                    <li class="dropdown-header" style="font-weight: bold;">COMPROMISSO</li>
-                    <li><a style="font-weight: bold;">Registrar Compromisso</a></li>
-                    <li><a style="font-weight: bold;">Compromissos Registrados</a></li>                  
-
-                    <li role="separator" class="divider"></li>
-
-                    <li class="dropdown-header" style="font-weight: bold;">RELATORIOS</li>
-                    <li><a style="font-weight: bold;">Compromissos P/ Data Agendamento</a></li>               
-              </ul>
-         </li>
+                    <li class="dropdown-header" style="font-weight: bold;">ATENDIMENTOS</li>             
+                    <li><a ui-sref="report-producer-act-region" style="font-weight: bold;">Registrar Atendimento</a></li>
+                    <li><a ui-sref="report-producer-with-family-agriculture" style="font-weight: bold;">Atendimentos Registrados</a></li>                       
+               </ul>
+         </li>-->
+         
+         <li class="dropdown" ng-show="user.username">
+            <a id="dLabel" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Relatórios <span class="caret"></span></a>
+    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+              <li class="dropdown-submenu">
+                  <a style="font-weight: bold;" tabindex="-1" href="#">Agricultura</a>
+                     <ul class="dropdown-menu">
+                          <li class="dropdown-header" style="font-weight: bold;">SETOR AGRICULTURA</li>             
+                          <li><a ui-sref="report-producer-act-region" style="font-weight: bold;">Produtores P/ Atividade e Região</a></li>
+                          <li><a ui-sref="report-producer-with-family-agriculture" style="font-weight: bold;">Produtores P/ Agricultura Familiar</a></li>
+                          <li><a ui-sref="report-producer-not-family-agriculture" style="font-weight: bold;">Produtores N/ Agricultura Familiar</a></li>                  
+                          <li><a ui-sref="report-order-status"style="font-weight: bold;">Pedidos P/ Status Conclusão </a></li>
+                          <li><a ui-sref="report-attendance-date-period" style="font-weight: bold;">Atendimentos P/ Periodo de Data</a></li>
+                          <li><a ui-sref="report-attendance-agriculture-status" style="font-weight: bold;">Atendimentos P/ Status Conclusão(Maquinários)</a></li>  
+                          <li><a style="font-weight: bold;">Atendimentos P/ Status Conclusão(A.Técnica)</a></li>  
+                    </ul>
+              </li>
               
-                <!--  <li ng-show="user.username"><a ui-sref="registered-attendancies">Atendimentos</a></li>-->
-               
+              <li class="divider"></li>
+              <li class="dropdown-submenu">
+                  <a style="font-weight: bold;" tabindex="-1" href="#">Esporte</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header" style="font-weight: bold;">SETOR ESPORTE</li>
+                        <li><a ui-sref="report-athlete-date-born" style="font-weight: bold;">Atletas P/ Data Nascimento</a></li>
+                        <li><a ui-sref="report-athlete-category" style="font-weight: bold;">Atletas P/ Categoria</a></li>
+                        <li><a ui-sref="report-attendance-sport-status" style="font-weight: bold;">Atendimentos P/ Status Conclusão</a></li>
+                   </ul>
+              </li>
+            </ul>           
+        </li>                           
 	</ul>
+	
 	<div class="container">
 		<ul class="nav navbar-nav navbar-right">
 		   <li ng-show="user.username"><a> <span class="user">Olá,
 				{{user.name}}</span> <span ng-click="logout()" href=""
 				class="logout">Sair</span>
 				</a></li>
-		   <li ng-show="!user.username"><a style="font-weight: bold;" ui-sref="register">Registrar-se</a></li>		
+		   <!--  <li ng-show="!user.username"><a style="font-weight: bold;" ui-sref="register">Registrar-se</a></li>	-->	
 		</ul>
       </div>	
 	</div>

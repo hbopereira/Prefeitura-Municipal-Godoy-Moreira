@@ -34,7 +34,7 @@ public class AppUserRestController {
 	 * 
 	 * @return list of all AppUser
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('AGRICULTURA')")
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public List<AppUser> users() {
 		return appUserRepository.findAll();

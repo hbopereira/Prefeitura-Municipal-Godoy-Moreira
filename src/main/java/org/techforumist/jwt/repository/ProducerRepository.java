@@ -15,9 +15,6 @@ public interface ProducerRepository extends JpaRepository<Producer,Long> {
 
 	public Producer findOneByName(String name);
 	
-	@Query(value=" SELECT COUNT(*) FROM tbl_producer", nativeQuery = true)
-	public Integer getRegisters();
-	
 	@Query(value=" SELECT COUNT(*) FROM tbl_producer tp"
 			   + " INNER JOIN producer_status ps ON tp.id = ps.producer_id"
 			   + " WHERE ps.status = 'Expirado' ", nativeQuery = true)
