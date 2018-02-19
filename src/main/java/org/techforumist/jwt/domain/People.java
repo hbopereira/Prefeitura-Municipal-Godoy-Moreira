@@ -154,6 +154,80 @@ public class People implements Serializable{
 		this.sector = sector;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((birth_date == null) ? 0 : birth_date.hashCode());
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((nameFather == null) ? 0 : nameFather.hashCode());
+		result = prime * result + ((nameMother == null) ? 0 : nameMother.hashCode());
+		result = prime * result + ((regions == null) ? 0 : regions.hashCode());
+		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
+		result = prime * result + ((sector == null) ? 0 : sector.hashCode());
+		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		People other = (People) obj;
+		if (birth_date == null) {
+			if (other.birth_date != null)
+				return false;
+		} else if (!birth_date.equals(other.birth_date))
+			return false;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (nameFather == null) {
+			if (other.nameFather != null)
+				return false;
+		} else if (!nameFather.equals(other.nameFather))
+			return false;
+		if (nameMother == null) {
+			if (other.nameMother != null)
+				return false;
+		} else if (!nameMother.equals(other.nameMother))
+			return false;
+		if (regions == null) {
+			if (other.regions != null)
+				return false;
+		} else if (!regions.equals(other.regions))
+			return false;
+		if (rg == null) {
+			if (other.rg != null)
+				return false;
+		} else if (!rg.equals(other.rg))
+			return false;
+		if (sector != other.sector)
+			return false;
+		if (sexo != other.sexo)
+			return false;
+		return true;
+	}
+    
+	
 	
 
 }
