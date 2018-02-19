@@ -324,7 +324,7 @@ angular.module('JWTDemoApp')
 	views : {
 		'content@' : {
 			templateUrl : 'app/views/attendanceAgriculture/report-attendance-date-period.html',
-			controller : 'AttendanceController'
+			controller : 'AttendanceAgricultureController'
 		}
 	}
   }).state('report-attendance-agriculture-status', {
