@@ -1,0 +1,180 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ <div class="container">
+   <div class="form-group">
+        <h3 class="well lead" align="center">Atendimentos Não Concluido</h3>
+         <div class="text-right">
+            <button type="button" class="btn btn-success btn-sm" ui-sref="new-attendance-technical-assistance">
+		      <span class="glyphicon glyphicon-plus"></span> Registrar Atendimento
+	        </button>
+         </div>
+	     <br/>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                   <input type="text" ng-model="pesquisaAtendimento" class="form-control" placeholder="Pesquisar..">
+                </div>
+                  <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </form> 
+      <br/>
+   </div>
+ </div> 
+ <hr class="featurette-divider"/>
+ <br/>
+    <div class="container">
+       <table class="table table-striped" id="idTable">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Nome Produtor</th>
+            <th>Nome Pessoa Diversa</th>
+            <th>Data Atendimento</th>
+            <th>Hora Atendimento</th>
+            <th>Status</th>
+            <th>Data Prevista</th>
+            <th>Funcionario</th>     
+            <th></th>
+            <th></th>
+          </tr>
+        </thead> 
+          <tr ng-repeat="attendance in attendanciesNot | filter: pesquisaAtendimento | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize" >
+             <td>{{attendance.producer.name}}</td>
+             <td>{{attendance.people.name}}</td>
+             <td>{{attendance.day_attendance | date: 'dd/MM/yyyy'}}</td>
+             <td>{{attendance.time_attendance}}</td>
+             <td>
+               <span ng-repeat="sta in attendance.status">{{sta}}</span>
+			 </td>
+			 <td>{{attendance.plannedDay | date: 'dd/MM/yyyy'}}</td>
+			 <td>
+               <span ng-repeat="emp in attendance.nameEmployee">{{emp}}</span>
+			 </td>  
+             <td>
+              <button title="Detalhes" type="button" class="btn btn-warning btn-sm"
+                 data-toggle="modal" data-target="#confirmar" ng-click="selectAttendance(attendance)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td>
+             <td>
+			  <button title="Editar" type="button" class="btn btn-info btn-sm"
+			    data-toggle="modal" data-target="#confirm" ng-click="selectAttendance(attendance)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			</td>  
+          </tr>
+     </table> 
+    </div> 
+     <hr class="featurette-divider"/>
+    <!-- modal of edition status of attendance -->
+    
+<div class="modal fade" id="confirm" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+               <p class="well lead" align="center">Controle de Atendimento</p>
+ <div class="alert alert-danger">
+  <strong>Atenção:</strong>O campo Motivo devera ser preenchido somente com a escolha do status: Não Concluido !
+</div>             
+ <form name="dados" class="alert alert-warning" role="alert">
+  <div class="row">
+      <div class="col-md-4">
+           <div class="form-group"
+			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+			    <label for="status">Status Atendimento</label>
+			       <select required multiple="multiple" ng-disabled="clickedAttendance.dateFinally" class="form-control" ng-model="clickedAttendance.status" id="status" name="status">
+						<option value="Andamento">Em andamento</option>
+						<option value="Não Concluido">Não concluido</option>
+						<option value="Finalizado">Finalizado</option>
+			       </select>
+	        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+           <label for="reason" class="required">Motivo Cancelamento</label>
+           <textarea type="text" required="required" ng-disabled="clickedAttendance.dateFinally" ng-model="clickedAttendance.cancelattionReason" id="reason" class="form-control margim-bottom" rows="4"></textarea>
+        </div>
+     </div>
+     <div class="col-md-4">
+       <div class="form-group">
+          <label for="DiaFinal" class="required"><em class="asterisco">Data Conclusão</em></label>
+          <input type="date" required="required" ng-model="clickedAttendance.dateFinally"  class="form-control" id="Data">
+       </div>
+    </div>
+  </div>
+  <button type="submit" data-dismiss="modal" class="btn btn-primary" ng-click="updateAttendance()">Salvar</button>     
+  <button type="submit" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+       
+      </form>
+     </div>
+   </div>
+  </div>
+</div>
+          
+       
+   <!-- modal of details of attendance -->  
+<div class="modal fade" id="confirmar" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-md">
+       <div class="modal-content">
+           <div class="modal-body">
+              <p class="well lead" align="center">Detalhes Atendimento</p>
+ <form name="dados" class="alert alert-warning" role="alert">
+     <div>
+        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
+           <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
+           <textarea type="text" required="required" ng-disabled="!clickedAttendance.ageMachine" ng-model="clickedAttendance.details" name="details" id="Details" 
+           class="form-control margim-bottom" rows="4" placeholder="Informe aqui os detalhes, a região, e a duração do tempo em que o maquinario estara em tal propriedade"></textarea>
+        </div>
+     </div>
+ <!--  <div class="row">
+   <div class="col-sm-4 col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
+           <br/> 
+           <br/>
+           <label class="rario-inline">Agricultura</label>
+           <input required="required" type="radio" name="sector" ng-model="clickedAttendance.sector" value="AGRICULTURA">         
+        </div>
+   </div>
+    <div class="col-sm-4 col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Prazo Realização<em class="asterisco">*</em></label>
+           <br/>
+           <br/> 
+           <label class="rario-inline">1 dias</label>
+           <input required="required" type="radio" name="deadline" ng-model="clickedAttendance.deadline" value="UmDia"><br/> 
+           <label class="rario-inline">2 dias</label>
+           <input required="required" type="radio" name="deadline" ng-model="clickedAttendance.deadline" value="DoisDias"><br/>     
+           <label class="rario-inline">4 dias</label>
+           <input required="required" type="radio" name="deadline" ng-model="clickedAttendance.deadline" value="QuatroDias"><br/>  
+           <label class="rario-inline">6 dias</label>
+           <input required="required" type="radio" name="deadline" ng-model="clickedAttendance.deadline" value="SeisDias">                       
+        </div>
+   </div>
+  </div> -->   
+  <button type="submit" data-dismiss="modal" class="btn btn-primary">Sair</button>
+       
+      </form>
+     </div>
+   </div>
+  </div>
+</div>
+     <div align="left">
+        <div>
+           <p><h4>Total</h4> {{totActive}} registros ao todo</p>
+        </div>
+     </div>
+     
+     <div align="center">
+        <pagination total-items="attendancies.length" class="pagination-sm" ng-model="currentPage" items-per-page="pageSize"></pagination> 
+     </div>
+     <br/>
+	 <br/>
+	 <br/>
+     <footer align="center">
+        <p>&copy; 2017 Todos os direitos reservados a Prefeitura Municipal &middot;</p>
+    </footer>
+    
+    <script>
+    $('#Data').val(dateFormated);
+    </script>
+    </div> 

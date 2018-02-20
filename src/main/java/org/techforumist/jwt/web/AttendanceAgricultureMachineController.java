@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.techforumist.jwt.domain.Activity;
-import org.techforumist.jwt.domain.AttendanceAgriculture;
+import org.techforumist.jwt.domain.AttendanceAgricultureMachine;
 import org.techforumist.jwt.domain.Producer;
-import org.techforumist.jwt.repository.AttendanceAgricultureRepository;
+import org.techforumist.jwt.repository.AttendanceAgricultureMachineRepository;
 import org.techforumist.jwt.repository.OrderRepository;
-import org.techforumist.jwt.service.AttendanceAgricultureService;
+import org.techforumist.jwt.service.AttendanceAgricultureMachineService;
 
 @RestController
 @RequestMapping("/AttendanceAgriculture")
-public class AttendanceAgricultureController {
+public class AttendanceAgricultureMachineController {
 	
 	@Autowired
-	private AttendanceAgricultureRepository attRepo;
+	private AttendanceAgricultureMachineRepository attRepo;
 	
 	@Autowired
 	private OrderRepository orderRepo;
 	
 	@Autowired
-	private AttendanceAgricultureService attService;
+	private AttendanceAgricultureMachineService attService;
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<?> saveAttendance(@RequestBody AttendanceAgriculture att){
+	public ResponseEntity<?> saveAttendance(@RequestBody AttendanceAgricultureMachine att){
 	   try{	
 	       return ResponseEntity
 	    		   .status(HttpStatus.OK)
@@ -50,36 +50,36 @@ public class AttendanceAgricultureController {
 	
 	@PreAuthorize("hasRole('ADMIN') AND hasRole('AGRICULTURA')")
 	@RequestMapping(value = "/getAttAll", method=RequestMethod.GET)
-	public List<AttendanceAgriculture> getAllAttendancies(){
-		return new ArrayList<AttendanceAgriculture>(attRepo.findAll());
+	public List<AttendanceAgricultureMachine> getAllAttendancies(){
+		return new ArrayList<AttendanceAgricultureMachine>(attRepo.findAll());
 	}
 	
 	@PreAuthorize("hasRole('ADMIN') AND hasRole('AGRICULTURA')")
 	@RequestMapping(value = "/getAttActive", method=RequestMethod.GET)
-	public List<AttendanceAgriculture> getAttendanciesActive(){
-		return new ArrayList<AttendanceAgriculture>(attRepo.findAttActive());
+	public List<AttendanceAgricultureMachine> getAttendanciesActive(){
+		return new ArrayList<AttendanceAgricultureMachine>(attRepo.findAttActive());
 	}
 	
 	@PreAuthorize("hasRole('ADMIN') AND hasRole('AGRICULTURA')")
 	@RequestMapping(value = "/getAttNot", method=RequestMethod.GET)
-	public List<AttendanceAgriculture> getAttendanciesNot(){
-		return new ArrayList<AttendanceAgriculture>(attRepo.findAttNot());
+	public List<AttendanceAgricultureMachine> getAttendanciesNot(){
+		return new ArrayList<AttendanceAgricultureMachine>(attRepo.findAttNot());
 	}
 	
 	@PreAuthorize("hasRole('ADMIN') AND hasRole('AGRICULTURA')")
 	@RequestMapping(value = "/getAttFinally", method=RequestMethod.GET)
-	public List<AttendanceAgriculture> getAttendanciesFinally(){
-		return new ArrayList<AttendanceAgriculture>(attRepo.findAttFinally());
+	public List<AttendanceAgricultureMachine> getAttendanciesFinally(){
+		return new ArrayList<AttendanceAgricultureMachine>(attRepo.findAttFinally());
 	}
 	
 	@RequestMapping(value = "/drop/{id}", method = RequestMethod.DELETE)
 	public void  deleteAttendance(@PathVariable Long id) {
-		AttendanceAgriculture att = attRepo.findOne(id);
+		AttendanceAgricultureMachine att = attRepo.findOne(id);
 		attRepo.delete(att);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public AttendanceAgriculture updateActivity(@RequestBody AttendanceAgriculture act) {
+	public AttendanceAgricultureMachine updateActivity(@RequestBody AttendanceAgricultureMachine act) {
 		if (attRepo.findOneByDetails(act.getDetails()) != null
 				&& attRepo.findOneByDetails(act.getDetails()).getId() != act.getId()) {
 			throw new RuntimeException("Description already exist");

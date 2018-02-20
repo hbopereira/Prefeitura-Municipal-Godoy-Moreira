@@ -205,7 +205,7 @@ angular.module('JWTDemoApp')
 		}
 	}).state('new-attendance-agriculture', {
 		parent : 'nav',
-		url : '/novo-atendimento-agricultura',
+		url : '/novo-atendimento-maquinario',
 		data : {
 			permissions :{
 				  only:	['ADMIN','AGRICULTURA']	
@@ -233,7 +233,7 @@ angular.module('JWTDemoApp')
 		}
 	}).state('attendancies-progress-agriculture', {
 		parent : 'nav',
-		url : '/atendimentos-cadastrados-agricultura',
+		url : '/atendimentos-andamentos-maquinarios',
 		data : {
 			roles: ['ADMIN','AGRICULTURA']	    
 		},
@@ -341,7 +341,7 @@ angular.module('JWTDemoApp')
 		}
 	  }).state('attendancies-finally-agriculture', {
 		parent : 'nav',
-		url : '/atendimentos-finalizados-agricultura',
+		url : '/atendimentos-finalizados-maquinarios',
 		data : {
 		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
 		},
@@ -353,7 +353,7 @@ angular.module('JWTDemoApp')
 		}
   }).state('attendancies-not-finish-agriculture', {
 		parent : 'nav',
-		url : '/atendimentos-nao-concluidos-agricultura',
+		url : '/atendimentos-nao-concluidos-maquinarios',
 		data : {
 		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
 		},
@@ -361,6 +361,54 @@ angular.module('JWTDemoApp')
 			'content@' : {
 				templateUrl : 'app/views/attendanceAgriculture/attendancies-not-finish-agriculture.html',
 				controller : 'AttendanceAgricultureController'
+			}
+		}
+  }).state('new-attendance-technical-assistance', {
+		parent : 'nav',
+		url : '/novo-atendimento-assistencia-tecnica',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/attendanceAgriculture/attendance-technical-assistance.html',
+				controller : 'AttendanceAgricultureTechnicalController'
+			}
+		}
+  }).state('attendancies-technical-assistance-progress', {
+		parent : 'nav',
+		url : '/atendimentos-andamento-assistencia-tecnica',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/attendanceAgriculture/attendancies-technical-assistance-progress.html',
+				controller : 'AttendanceAgricultureTechnicalController'
+			}
+		}
+  }).state('attendancies-technical-assistance-not-finish', {
+		parent : 'nav',
+		url : '/atendimentos-nao-concluido-assistencia-tecnica',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/attendanceAgriculture/attendancies-technical-assistance-not-finish.html',
+				controller : 'AttendanceAgricultureTechnicalController'
+			}
+		}
+  }).state('attendancies-technical-assistance-finally', {
+		parent : 'nav',
+		url : '/atendimentos-finalizado-assistencia-tecnica',
+		data : {
+		    roles: ['SUBORDINADO_R_AGRICULTURA','ADMIN','AGRICULTURA']
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/attendanceAgriculture/attendancies-technical-assistance-finally.html',
+				controller : 'AttendanceAgricultureTechnicalController'
 			}
 		}
   }).state('historic-attendancies-agriculture', {

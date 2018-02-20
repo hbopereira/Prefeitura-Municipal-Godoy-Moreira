@@ -78,7 +78,7 @@
                                   <li role="separator" class="divider"></li>
                                   
                                   <li class="dropdown-header" style="font-weight: bold;">ASSISTENCIA TÉCNICA</li>
-                                  <li><a style="font-weight: bold;">Agendar Assistencia Tecnica</a></li> 
+                                  <li><a ui-sref="new-attendance-technical-assistance" style="font-weight: bold;">Agendar Assistencia Tecnica</a></li> 
                                   
                                 </ul>
                          </li>
@@ -168,15 +168,31 @@
 
  <ol ng-show="user.username" class="breadcrumb">
   <li class="breadcrumb-item"><a style="font-weight: bold;">ATENDIMENTOS</a></li>
-  <li class="dropdown">
-     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Agricultura <span class="caret"></span></a>
-           <ul class="dropdown-menu">
-                 <li class="dropdown-header" style="font-weight: bold;">Atendimentos Registrados</li>
-                 <li><a ui-sref="attendancies-progress-agriculture" style="font-weight: bold;">Em Andamento</a></li>
-                 <li><a ui-sref="attendancies-not-finish-agriculture"  style="font-weight: bold;">Não Concluido</a></li>
-                 <li><a ui-sref="attendancies-finally-agriculture"  style="font-weight: bold;">Finalizados</a></li>                                                    
-           </ul>
-  </li>
+   <li class="dropdown" ng-show="user.username">
+            <a id="dLabel" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Agricultura <span class="caret"></span></a>
+    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+              <li class="dropdown-submenu">
+                  <a style="font-weight: bold;" tabindex="-1" href="#">Maquinarios</a>
+                     <ul class="dropdown-menu">
+                         <li class="dropdown-header" style="font-weight: bold;">Atendimentos Registrados</li>
+                           <li><a ui-sref="attendancies-progress-agriculture" style="font-weight: bold;">Em Andamento</a></li>
+                           <li><a ui-sref="attendancies-not-finish-agriculture"  style="font-weight: bold;">Não Concluido</a></li>
+                           <li><a ui-sref="attendancies-finally-agriculture"  style="font-weight: bold;">Finalizados</a></li>                                                                         
+                    </ul>
+              </li>
+              
+              <li class="divider"></li>
+              <li class="dropdown-submenu">
+                  <a style="font-weight: bold;" tabindex="-1" href="#">Assistencia Técnica</a>
+                    <ul class="dropdown-menu">
+                         <li class="dropdown-header" style="font-weight: bold;">Atendimentos Registrados</li>
+                           <li><a ui-sref="attendancies-technical-assistance-progress" style="font-weight: bold;">Em Andamento</a></li>
+                           <li><a ui-sref="attendancies-technical-assistance-not-finish" style="font-weight: bold;">Não Concluido</a></li>
+                           <li><a ui-sref="attendancies-technical-assistance-finally" style="font-weight: bold;">Finalizados</a></li>                                                         
+                   </ul>
+              </li>
+            </ul>           
+        </li>
   <li class="dropdown">
      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Esporte <span class="caret"></span></a>
            <ul class="dropdown-menu">

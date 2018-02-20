@@ -34,8 +34,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@Table(name="tbl_attendance_Agriculture")
-public class AttendanceAgriculture implements Serializable {
+@Table(name="tbl_attendance_Agriculture_machine")
+public class AttendanceAgricultureMachine implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -57,7 +57,6 @@ public class AttendanceAgriculture implements Serializable {
 	private String cancelattionReason;
 	
 	@Column(name="at_details")
-	@NotNull
 	private String details;
 	
 	@Column(name="at_dayattendance")

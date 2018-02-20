@@ -1,0 +1,193 @@
+<style>
+em{
+	color: red;
+}
+
+</style>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container"> 
+ <h3 class="well lead" align="center">Novo Atendimento</h3>
+  <br/>
+    <div class="text-right"> 
+       <form class="navbar-form navbar-right" role="search">
+          <div class="form-group">
+              <input type="Text" ng-model="pesquisar" class="form-control" placeholder="Pesquisar...">
+          </div>
+          <button type="submit" class="btn btn-primary">Pesquisar</button>
+      </form> 
+      <br/>
+  </div>
+  <br/>
+  <hr class="featurette-divider"/> 
+  <br/> 
+  <div class="row">
+   <div class="col-sm-6">
+   <h4 align="center">Produtores</h4>
+    <div class="panel panel-default">
+     <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>CPF</th>        
+            <th></th>        
+          </tr>
+        </thead> 
+          <tr ng-repeat="producer in producers | filter: pesquisa | limitTo: 1">
+             <td>{{producer.name}}</td>
+             <td>{{producer.birth_date | date: 'dd/MM/yyyy'}}</td>
+             <td>{{producer.cpf}}</td>     
+			 <td>
+			  <button title="Vizualizar" type="button" class="btn btn-info btn-sm"
+			    data-toggle="modal" data-target="#confirm" ng-click="selectProducer(producer)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td> 
+          </tr>
+      </table>
+    </div>
+  </div>
+  </div>
+    <div class="col-sm-6">
+     <h4 align="center">Pessoas Diversas</h4>
+     <div class="panel panel-default">
+       <div class="panel-body">
+       <table class="table table-striped">
+        <thead>
+          <tr class="alert alert-warning">
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>CPF</th>           
+            <th></th>
+          </tr>
+        </thead> 
+          <tr ng-repeat="people in peoplesFromAgriculture | filter: pesquisa | limitTo: 1">
+             <td>{{people.name}}</td>
+             <td>{{people.birth_date | date: 'dd/MM/yyyy'}}</td>
+             <td>{{people.cpf}}</td>                 
+			 <td>
+			  <button title="Vizualizar" type="button" class="btn btn-info btn-sm"
+			    data-toggle="modal" data-target="#confirmation" ng-click="selectPeople(people)">
+				<span class="glyphicon glyphicon-edit"></span>
+			  </button>
+			 </td> 
+          </tr>
+      </table>
+       </div>
+     </div>  
+    </div>
+   </div>  
+  <hr class="featurette-divider"/> 
+  <br/>
+  <form name="dados" id="cadastroAtendimento" ng-submit="saveAttendance()" class="alert alert-warning" role="alert">
+  <div class="row">
+  <div class="col-sm-4 col-md-3">
+           <div class="form-group"
+			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+			    <label for="status">Nome Produtor<em class="asterisco">*</em></label>
+			        <select class="form-control" ng-disabled="attendance.people" ng-model="attendance.producer.id" id="producer" name="producer">
+			            <option value>Selecione</option>
+				        <option value="{{producer.id}}" ng-repeat="producer in producers">{{producer.name}}</option>
+			       </select>   
+	        </div>
+   </div>
+     <div class="col-sm-4 col-md-3">
+          <div class="form-group"
+			  ng-class="{ 'has-error': dados.name.$invalid && dados.name.$dirty }">
+			    <label for="status">Nome Pessoa Comum<em class="asterisco">*</em></label>
+			       <select class="form-control" ng-disabled="attendance.producer" ng-model="attendance.people.id" id="people" name="people">	 
+			            <option value>Selecione</option>       	           		            
+				        <option value="{{people.id}}" data-ng-repeat="people in peoplesFromAgriculture">{{people.name}}</option>
+			       </select>
+	      </div>
+     </div>
+     <div class="col-sm-4 col-md-3">
+         <div class="form-group" ng-class="{ 'has-error': dados.day_attendance.$invalid && dados.day_attendance.$dirty }">
+           <label for="diaAtendimento" class="required">Dia Atendimento<em class="asterisco">*</em></label>
+           <input type="date" required="required" class="form-control" ng-model="attendance.day_attendance" name="day_attendance" id="dayAttendance" placeholder="Informe o Dia do Atendimento">
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-3">
+         <div class="form-group" ng-class="{ 'has-error': dados.plannedDay.$invalid && dados.plannedDay.$dirty }">
+           <label for="diaAtendimento" class="required">Data Previsto Realização<em class="asterisco">*</em></label>
+           <input type="date" required="required" class="form-control" ng-model="attendance.plannedDay" name="plannedDay" id="plannedDay" placeholder="Informe o Dia do Atendimento">
+        </div>
+     </div>
+   </div>  
+  <div class="row">
+     <div class="col-md-4">
+        <div class="form-group"  ng-class="{ 'has-error': dados.details.$invalid && dados.details.$dirty }">
+          <label for="Detalhes" class="required">Detalhes<em class="asterisco">*</em></label>
+          <textarea type="text" required="required" ng-model="attendance.details" name="details" id="Details" class="form-control margim-bottom" rows="4"></textarea>
+        </div>
+     </div>
+     <div class="col-sm-4 col-md-4">
+        <div class="form-group"
+	        ng-class="{ 'has-error': dados.nameEmployee.$invalid && dados.nameEmployee.$dirty }">
+			   <label for="employee">Funcionario<em class="asterisco">*</em></label>
+			     <select required multiple="multiple" class="form-control" ng-model="attendance.nameEmployee" id="employee" name="nameEmployee">
+				     <option value="Thales">Thales</option>
+					 <option value="Beatriz">Beatriz</option>
+					 <option value="Denis">Denis</option>
+					 <option value="Nei">Nei</option>
+					 <option value="Darcy">Darcy</option>					
+			     </select>
+	        </div>
+       </div>
+       <div class="col-sm-4 col-md-4"> 
+             <div class="form-group"
+			  ng-class="{ 'has-error': dados.status.$invalid && dados.status.$dirty }">
+			    <label for="status">Status Atendimento<em class="asterisco">*</em></label>
+			       <select required multiple="multiple" class="form-control" ng-model="attendance.status" id="status" name="status">
+			      
+				        <option value="Andamento">Em andamento</option>						
+			       </select>
+	        </div>      
+      </div>
+  </div>
+  <br/>
+  <!--  <div class="row">
+   <div class="col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Setor<em class="asterisco">*</em></label>
+           <br/> 
+           <br/>
+           <label class="rario-inline">Agricultura</label>
+           <input required="required" type="radio" name="sector" ng-model="attendance.sector" value="AGRICULTURA">         
+        </div>
+   </div>
+    <div class="col-md-4">
+         <div class="form-group"  ng-class="{ 'has-error': dados.sexo.$invalid && dados.sexo.$dirty }">
+           <label for="sexo" class="required">Prazo Realização<em class="asterisco">*</em></label>
+           <br/>
+           <br/> 
+           <label class="rario-inline">1 dias</label>
+           <input type="radio" name="deadline" ng-model="attendance.deadline" value="UmDia"><br/> 
+           <label>2 dias</label>
+           <input  type="radio" name="deadline" ng-model="attendance.deadline" value="DoisDias"><br/>     
+           <label>4 dias</label>
+           <input  type="radio" name="deadline" ng-model="attendance.deadline" value="QuatroDias"><br/>  
+           <label>6 dias</label>
+           <input  type="radio" name="deadline" ng-model="attendance.deadline" value="SeisDias">                       
+        </div>
+   </div>
+  </div>   -->
+
+  
+  <button type="submit" ng-disabled="!attendance.day_attendance" class="btn btn-primary">Salvar</button>
+  <button type="submit" class="btn btn-warning">Cancelar</button>
+  <button type="submit" class="btn btn-success" ui-sref="attendancies-technical-assistance-progress">Atendimentos</button>
+       
+  </form>
+  <hr class="featurette-divider"/>
+  <br>
+
+  <footer align="center">
+        <p>&copy; 2017 Todos os diretos reservados a Prefeitura Municipal &middot;</p>
+  </footer>
+ </div>
