@@ -413,7 +413,7 @@ angular.module('JWTDemoApp')
 		}
   }).state('historic-attendancies-agriculture', {
 		parent : 'nav',
-		url : '/historico-atendimentos-agricultura',
+		url : '/historico-atendimentos-maquinarios',
 		data : {
 		    role: 'ADMIN'
 		},
@@ -423,7 +423,19 @@ angular.module('JWTDemoApp')
 				controller : 'AttendanceAgricultureController'
 			}
 		}
-  }).state('historic-registered-orders', {
+  }).state('historic-attendancies-technical-assistance', {
+		parent : 'nav',
+		url : '/historico-atendimentos-assistencia-tecnica',
+		data : {
+		    role: 'ADMIN'
+		},
+		views : {
+			'content@' : {
+				templateUrl : 'app/views/attendanceAgriculture/historic-attendancies-technical-assistance.html',
+				controller : 'AttendanceAgricultureTechnicalController'
+			}
+		}
+  }) .state('historic-registered-orders', {
 		parent : 'nav',
 		url : '/historico-pedidos-registrados',
 		data : {
